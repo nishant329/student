@@ -592,7 +592,7 @@ function addNotice(){
 // 🔥 FIREBASE LOAD FUNCTION (OUTSIDE)
 async function loadItems(){
   try {
-    const querySnapshot = await getDocs(collection(window.db, "items"));
+    const querySnapshot = await window.getDocs(window.collection(window.db, "items"));
 
     D.items = [];
 
