@@ -301,9 +301,6 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
   import { getFirestore, collection, addDoc, getDocs } 
   from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
-  window.collection = collection;
-  window.addDoc = addDoc;
-  window.getDocs = getDocs;
   
   const firebaseConfig = {
     apiKey: "AIzaSyCWSB5hd5tZVMoh3r-dctta7f91UztMzIs",
@@ -313,10 +310,16 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
     messagingSenderId: "574095352204",
     appId: "1:574095352204:web:67f8cc041b7f3069d276a9"
   };
-
   const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.firebaseAPI = {
+    db,
+    collection,
+    addDoc,
+    getDocs
+  };
   const auth = getAuth(app);
-  window.db = getFirestore(app);
   const provider = new GoogleAuthProvider();
 
   // Expose login function globally so non-module script can call it[web:21][web:33]
@@ -592,7 +595,9 @@ function addNotice(){
 // 🔥 FIREBASE LOAD FUNCTION (OUTSIDE)
 async function loadItems(){
   try {
-    const querySnapshot = await window.getDocs(window.collection(window.db, "items"));
+    const querySnapshot = await window.firebaseAPI.getDocs(
+      window.firebaseAPI.collection(window.firebaseAPI.db, "items")
+    );
 
     D.items = [];
 
@@ -628,7 +633,10 @@ async function addItem(){
   };
 
   try {
-    await addDoc(collection(window.db, "items"), item);
+    await window.firebaseAPI.addDoc(
+      window.firebaseAPI.collection(window.firebaseAPI.db, "items"),
+      item
+    );  
 
     // clear inputs
     ['p-name','p-year','p-link','p-code'].forEach(id=>{
