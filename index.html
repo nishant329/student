@@ -298,6 +298,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
+  import { getFirestore, collection, addDoc, getDocs } 
+  from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyCWSB5hd5tZVMoh3r-dctta7f91UztMzIs",
     authDomain: "gec-bharuch-electrical.firebaseapp.com",
@@ -309,6 +311,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getFirestore(app);
   const provider = new GoogleAuthProvider();
 
   // Expose login function globally so non-module script can call it[web:21][web:33]
@@ -530,6 +533,8 @@ function closeAdmin(){
   document.getElementById('overlay').classList.remove('open');
 }
 
+<script>
+
 // Called after Firebase login success
 function openPanel(){
   document.getElementById('admin-wrap').style.display='';
@@ -541,9 +546,11 @@ function renderAdminLists(){
   document.getElementById('admin-notices').innerHTML = D.notices.map((n,i)=>`
     <div class="aitem"><div class="aitem-text">${esc(n.title)}<div class="aitem-sub">${n.type.toUpperCase()} · ${n.date}</div></div>
     <button class="btn-del" onclick="delItem('notices',${i})">Delete</button></div>`).join('');
+
   document.getElementById('admin-items').innerHTML = D.items.map((p,i)=>`
     <div class="aitem"><div class="aitem-text">${esc(p.name)}<div class="aitem-sub">Sem ${p.sem} · ${CAT_LABEL[p.cat]} · ${p.year}</div></div>
     <button class="btn-del" onclick="delItem('items',${i})">Delete</button></div>`).join('');
+
   document.getElementById('admin-ticker').innerHTML = D.ticker.map((t,i)=>`
     <div class="aitem"><div class="aitem-text">${esc(t)}</div>
     <button class="btn-del" onclick="delItem('ticker',${i})">Delete</button></div>`).join('');
@@ -555,43 +562,95 @@ function delItem(key,i){
   renderAll();
   renderAdminLists();
 }
+
 function saveWa(){
   D.waLink=document.getElementById('wa-input').value.trim();
   save(D);
   document.getElementById('wa-btn').href=D.waLink;
   alert('Saved!');
 }
+
 function addNotice(){
   const t=document.getElementById('n-title').value.trim();
   if(!t)return;
-  D.notices.unshift({title:t,type:document.getElementById('n-type').value,date:today()});
-  document.getElementById('n-title').value='';
-  save(D);renderAll();renderAdminLists();
-}
-function addItem(){
-  const name=document.getElementById('p-name').value.trim();
-  const link=document.getElementById('p-link').value.trim();
-  if(!name||!link){alert('Please fill in the name and the Google Drive link.');return;}
-  D.items.push({
-    sem:parseInt(document.getElementById('p-sem').value),
-    cat:document.getElementById('p-cat').value,
-    name,
-    year:document.getElementById('p-year').value.trim(),
-    link,
-    code:document.getElementById('p-code').value.trim()
+  D.notices.unshift({
+    title:t,
+    type:document.getElementById('n-type').value,
+    date:today()
   });
-  ['p-name','p-year','p-link','p-code'].forEach(id=>document.getElementById(id).value='');
-  save(D);renderAll();renderAdminLists();
+  document.getElementById('n-title').value='';
+  save(D);
+  renderAll();
+  renderAdminLists();
 }
+
+// 🔥 FIREBASE LOAD FUNCTION (OUTSIDE)
+async function loadItems(){
+  try {
+    const querySnapshot = await getDocs(collection(db, "items"));
+
+    D.items = [];
+
+    querySnapshot.forEach((doc) => {
+      D.items.push(doc.data());
+    });
+
+    renderAll();
+
+  } catch (error) {
+    console.error(error);
+    alert("Error loading data ❌");
+  }
+}
+
+// 🔥 UPDATED ADD ITEM FUNCTION
+async function addItem(){
+  const name = document.getElementById('p-name').value.trim();
+  const link = document.getElementById('p-link').value.trim();
+
+  if(!name || !link){
+    alert('Please fill in the name and the Google Drive link.');
+    return;
+  }
+
+  const item = {
+    sem: parseInt(document.getElementById('p-sem').value),
+    cat: document.getElementById('p-cat').value,
+    name: name,
+    year: document.getElementById('p-year').value.trim(),
+    link: link,
+    code: document.getElementById('p-code').value.trim()
+  };
+
+  try {
+    await addDoc(collection(db, "items"), item);
+
+    // clear inputs
+    ['p-name','p-year','p-link','p-code'].forEach(id=>{
+      document.getElementById(id).value='';
+    });
+
+    alert("Uploaded for everyone ✅");
+
+    loadItems(); // reload from firebase
+
+  } catch (error) {
+    console.error(error);
+    alert("Error uploading ❌");
+  }
+}
+
 function addTicker(){
   const msg=document.getElementById('ticker-input').value.trim();
   if(!msg)return;
   D.ticker.push(msg);
   document.getElementById('ticker-input').value='';
-  save(D);renderAll();renderAdminLists();
+  save(D);
+  renderAll();
+  renderAdminLists();
 }
 
-renderAll();
+// 🔥 IMPORTANT CHANGE HERE
+loadItems();
+
 </script>
-</body>
-</html>
