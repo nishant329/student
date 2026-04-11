@@ -341,7 +341,15 @@ const CAT_ICON  = {midsem:"📝",gtu:"📋",solved:"✅",notes:"📄",resource:"
 const CATS = ["midsem","gtu","solved","notes","resource"];
 
 const DEF = {
-  waLink:"https://chat.whatsapp.com/YOUR_LINK_HERE",
+  waLink:"https://chat.whatsapp.com/KRTvtsgZH2jFXUkjKEaa5d",
+  visibleSems: {
+    1: true,
+    2: true,
+    3: false,
+    4: false,
+    5: false,
+    6: false
+  },
   notices:[
     {title:"Internal exam schedule released — Sem 4 & 6",type:"urgent",date:"10 Apr 2026"},
     {title:"Mid-sem papers for Electrical Machines & Power Systems uploaded",type:"new",date:"8 Apr 2026"},
@@ -426,6 +434,13 @@ function getFirstCat(sem){
 }
 
 function buildSemHTML(sem){
+  if(D.visibleSems && !D.visibleSems[sem]){
+    return `<div class="empty">
+      🚧 <strong>Coming Soon</strong><br>
+      Content for Semester ${sem} will be uploaded soon.
+    </div>`;
+  }
+
   const sidebar = CATS.map(c=>{
     const cnt = D.items.filter(i=>i.sem==sem&&i.cat===c).length;
     return `<button class="cat-btn" id="cb-${sem}-${c}" onclick="switchCat(${sem},'${c}')">
