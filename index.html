@@ -311,7 +311,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const db = getFirestore(app);
+  window.db = getFirestore(app);
   const provider = new GoogleAuthProvider();
 
   // Expose login function globally so non-module script can call it[web:21][web:33]
@@ -587,7 +587,7 @@ function addNotice(){
 // 🔥 FIREBASE LOAD FUNCTION (OUTSIDE)
 async function loadItems(){
   try {
-    const querySnapshot = await getDocs(collection(db, "items"));
+    const querySnapshot = await getDocs(collection(window.db, "items"));
 
     D.items = [];
 
