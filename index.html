@@ -3,261 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EE Hub — Senior Resource Portal</title>
+<title>EE Hub — GTU Electrical Engineering</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#faf8f4;
-  --white:#ffffff;
-  --ink:#0f0f0d;
-  --ink2:#3a3a36;
-  --ink3:#8a8a82;
-  --ink4:#c4c4bc;
-  --amber:#d4890a;
-  --amber-light:#fef3dc;
-  --amber-mid:#f6c90e;
-  --amber-dark:#8a5a00;
-  --border:#e2e0d8;
-  --border2:#cccac0;
-  --red:#c0392b;
-  --red-bg:#fdf0ee;
-  --blue:#1a5fa5;
-  --blue-bg:#eaf2fb;
-  --green:#2e7d32;
-  --green-bg:#edf7ee;
-  --serif:'Instrument Serif',serif;
-  --sans:'DM Sans',sans-serif;
-  --mono:'DM Mono',monospace;
+  --bg:#faf8f4;--white:#fff;--ink:#0f0f0d;--ink2:#3a3a36;--ink3:#8a8a82;
+  --amber:#d4890a;--amber-light:#fef3dc;--amber-mid:#f6c90e;--amber-dark:#8a5a00;
+  --border:#e2e0d8;--red:#c0392b;--red-bg:#fdf0ee;--blue:#1a5fa5;--blue-bg:#eaf2fb;
+  --green:#2e7d32;--green-bg:#edf7ee;
+  --serif:'Instrument Serif',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
 }
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);min-height:100vh;overflow-x:hidden}
-
-/* ── NAV ── */
-nav{background:var(--ink);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:200}
-.nav-logo{font-family:var(--serif);font-size:22px;color:var(--white);letter-spacing:-0.5px;font-style:italic}
+nav{background:var(--ink);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:300}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--white);font-style:italic}
 .nav-logo strong{font-style:normal;color:var(--amber-mid)}
-.nav-right{display:flex;align-items:center;gap:24px}
-.nav-link{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;font-weight:400;letter-spacing:0.2px;transition:color 0.2s}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-link{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s}
 .nav-link:hover{color:var(--white)}
 .nav-pill{font-size:11px;font-family:var(--mono);background:var(--amber);color:var(--ink);padding:4px 12px;border-radius:2px;font-weight:500}
-
-/* ── HERO ── */
-.hero{background:var(--ink);padding:72px 48px 64px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
-.hero-eyebrow{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.hero{background:var(--ink);padding:64px 48px 56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:8px}
 .hero-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--amber)}
-.hero h1{font-family:var(--serif);font-size:clamp(44px,5vw,72px);color:var(--white);line-height:1.0;letter-spacing:-2px;margin-bottom:20px}
+.hero h1{font-family:var(--serif);font-size:clamp(40px,5vw,68px);color:var(--white);line-height:1.0;letter-spacing:-2px;margin-bottom:16px}
 .hero h1 em{color:var(--amber-mid);font-style:italic}
-.hero-sub{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.75;font-weight:300;max-width:420px}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.75;font-weight:300;max-width:400px}
 .hero-right{display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,0.1);padding-left:48px}
-.stat-row{padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
+.stat-row{padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
 .stat-row:last-child{border-bottom:none}
-.stat-num{font-family:var(--serif);font-size:40px;color:var(--amber-mid);line-height:1}
-.stat-label{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
-.divider-bar{height:4px;background:var(--amber);width:100%}
-
-/* ── TICKER ── */
-.ticker-wrap{background:var(--amber);padding:10px 0;overflow:hidden;position:relative}
+.stat-num{font-family:var(--serif);font-size:38px;color:var(--amber-mid);line-height:1}
+.stat-label{font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;text-transform:uppercase;letter-spacing:1.5px}
+.divider-bar{height:4px;background:var(--amber)}
+.ticker-wrap{background:var(--amber);padding:9px 0;overflow:hidden;position:relative}
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;width:40px;height:100%;z-index:2}
 .ticker-wrap::before{left:0;background:linear-gradient(90deg,var(--amber),transparent)}
 .ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--amber),transparent)}
-.ticker-track{display:flex;gap:56px;animation:marquee 28s linear infinite;white-space:nowrap}
+.ticker-track{display:flex;gap:48px;animation:marquee 30s linear infinite;white-space:nowrap}
 .ticker-item{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:500;flex-shrink:0;letter-spacing:0.5px}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ── MAIN ── */
-.main{max-width:1100px;margin:0 auto;padding:0 32px}
-.section{padding:56px 0}
+.main{max-width:1140px;margin:0 auto;padding:0 32px}
+.section{padding:52px 0}
 .section+.section{border-top:1px solid var(--border)}
 .sec-label{font-family:var(--mono);font-size:11px;color:var(--amber-dark);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
-.sec-title{font-family:var(--serif);font-size:32px;letter-spacing:-0.5px;margin-bottom:32px;color:var(--ink)}
-
-/* ── NOTICES ── */
+.sec-title{font-family:var(--serif);font-size:30px;letter-spacing:-0.5px;margin-bottom:28px}
 .notices{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:4px;overflow:hidden}
 .notice{display:flex;align-items:stretch;border-bottom:1px solid var(--border);background:var(--white);transition:background 0.15s}
 .notice:last-child{border-bottom:none}
 .notice:hover{background:#fafaf6}
-.notice-stripe{width:4px;flex-shrink:0}
-.stripe-red{background:var(--red)}
-.stripe-amber{background:var(--amber)}
-.stripe-blue{background:var(--blue)}
-.notice-body{flex:1;padding:16px 20px}
-.notice-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
-.notice-meta{font-family:var(--mono);font-size:11px;color:var(--ink3)}
-.notice-badge{align-self:center;margin:0 20px;font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 10px;border-radius:2px;white-space:nowrap;letter-spacing:0.5px}
-.badge-urgent{background:var(--red-bg);color:var(--red)}
-.badge-new{background:var(--amber-light);color:var(--amber-dark)}
-.badge-info{background:var(--blue-bg);color:var(--blue)}
-
-/* ── TABS ── */
-.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:28px}
-.tab{font-family:var(--mono);font-size:12px;padding:10px 20px;cursor:pointer;color:var(--ink3);border:none;background:transparent;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.15s;letter-spacing:0.5px}
-.tab.active{color:var(--ink);border-bottom-color:var(--amber);font-weight:500}
-.tab:hover:not(.active){color:var(--ink2)}
-.panel{display:none}
-.panel.active{display:block}
-
-/* ── PAPERS ── */
-.papers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-.paper-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:20px;transition:border-color 0.2s}
+.nstripe{width:4px;flex-shrink:0}
+.s-red{background:var(--red)}.s-amber{background:var(--amber)}.s-blue{background:var(--blue)}
+.nbody{flex:1;padding:14px 20px}
+.ntitle{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.nmeta{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.nbadge{align-self:center;margin:0 20px;font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 10px;border-radius:2px;white-space:nowrap;letter-spacing:0.5px}
+.b-urgent{background:var(--red-bg);color:var(--red)}
+.b-new{background:var(--amber-light);color:var(--amber-dark)}
+.b-info{background:var(--blue-bg);color:var(--blue)}
+.sem-nav{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.sem-btn{font-family:var(--mono);font-size:13px;padding:10px 24px;border-radius:3px;cursor:pointer;border:1px solid var(--border);background:var(--white);color:var(--ink3);transition:all 0.15s;font-weight:500}
+.sem-btn:hover{border-color:var(--amber);color:var(--ink)}
+.sem-btn.active{background:var(--ink);color:var(--amber-mid);border-color:var(--ink)}
+.sem-panel{display:none}
+.sem-panel.active{display:block}
+.sem-layout{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start}
+.sem-sidebar{}
+.sidebar-label{font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.cat-list{display:flex;flex-direction:column;gap:3px}
+.cat-btn{font-size:13px;padding:9px 14px;border-radius:3px;cursor:pointer;border:none;background:transparent;color:var(--ink3);text-align:left;transition:all 0.15s;font-family:var(--sans);display:flex;justify-content:space-between;align-items:center;width:100%}
+.cat-btn:hover{background:var(--bg);color:var(--ink)}
+.cat-btn.active{background:var(--amber-light);color:var(--amber-dark);font-weight:500}
+.cat-cnt{font-family:var(--mono);font-size:10px;opacity:0.6}
+.content-area{}
+.cpanel{display:none}
+.cpanel.active{display:block}
+.cpanel-head{font-family:var(--mono);font-size:11px;color:var(--amber-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.empty{padding:36px;text-align:center;color:var(--ink3);font-family:var(--mono);font-size:13px;background:var(--white);border:1px dashed var(--border);border-radius:4px;line-height:1.7}
+.papers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.paper-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:18px;transition:border-color 0.2s}
 .paper-card:hover{border-color:var(--amber)}
-.paper-sem{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-bottom:8px;letter-spacing:0.5px}
-.paper-subject{font-size:15px;font-weight:700;margin-bottom:12px;color:var(--ink);line-height:1.3}
-.paper-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.paper-tag{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:2px;background:var(--bg);color:var(--ink3);border:1px solid var(--border)}
-.paper-tag.solved{background:var(--green-bg);color:var(--green);border-color:transparent}
-.dl-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--amber-dark);background:var(--amber-light);border:1px solid #e8d090;padding:7px 14px;border-radius:2px;text-decoration:none;transition:background 0.15s;letter-spacing:0.3px}
+.pyear{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:7px;letter-spacing:0.5px}
+.pname{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--ink);line-height:1.3}
+.ptags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.ptag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:2px;background:var(--bg);color:var(--ink3);border:1px solid var(--border)}
+.ptag.solved{background:var(--green-bg);color:var(--green);border-color:transparent}
+.ptag.gtu{background:var(--blue-bg);color:var(--blue);border-color:transparent}
+.dl-btn{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--amber-dark);background:var(--amber-light);border:1px solid #e8d090;padding:6px 12px;border-radius:2px;text-decoration:none;transition:background 0.15s}
 .dl-btn:hover{background:#faecc0}
-
-/* ── RESOURCES ── */
-.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.res-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:20px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;transition:border-color 0.2s}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.res-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:16px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;transition:border-color 0.2s}
 .res-card:hover{border-color:var(--amber)}
-.res-icon{font-size:20px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:4px}
-.res-name{font-size:14px;font-weight:700;color:var(--ink)}
-.res-sub{font-family:var(--mono);font-size:11px;color:var(--ink3)}
-.res-count{font-family:var(--mono);font-size:11px;color:var(--amber-dark);margin-top:auto}
-
-/* ── WHATSAPP ── */
-.wa-section{background:var(--ink);padding:64px 48px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
-.wa-heading{font-family:var(--serif);font-size:36px;color:var(--white);letter-spacing:-1px;margin-bottom:12px}
-.wa-sub{font-size:15px;color:rgba(255,255,255,0.45);font-weight:300;line-height:1.7;max-width:500px}
-.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#0a1a0a;font-family:var(--mono);font-size:13px;font-weight:700;padding:16px 28px;border-radius:3px;text-decoration:none;white-space:nowrap;transition:background 0.2s}
+.ricon{font-size:18px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:4px}
+.rname{font-size:13px;font-weight:700;color:var(--ink)}
+.rsub{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+.rcount{font-family:var(--mono);font-size:10px;color:var(--amber-dark);margin-top:auto}
+.wa-section{background:var(--ink);padding:60px 48px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+.wa-heading{font-family:var(--serif);font-size:34px;color:var(--white);letter-spacing:-1px;margin-bottom:10px}
+.wa-sub{font-size:15px;color:rgba(255,255,255,0.45);font-weight:300;line-height:1.7;max-width:480px}
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#0a1a0a;font-family:var(--mono);font-size:13px;font-weight:700;padding:14px 26px;border-radius:3px;text-decoration:none;white-space:nowrap;transition:background 0.2s}
 .wa-btn:hover{background:#1fbe59}
-
-/* ── FOOTER ── */
-footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .footer-left{font-size:13px;color:rgba(255,255,255,0.3)}
 .footer-left strong{color:var(--amber)}
-.footer-right{font-size:11px;font-family:var(--mono);color:rgba(255,255,255,0.15);cursor:pointer;user-select:none}
-.footer-right:hover{color:rgba(255,255,255,0.4)}
-
-/* ── ADMIN OVERLAY ── */
-.admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:20px}
-.admin-overlay.open{display:flex}
-.admin-box{background:var(--white);border-radius:8px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.4)}
-.admin-header{background:var(--ink);padding:20px 24px;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between}
-.admin-title{font-family:var(--serif);font-size:20px;color:var(--white);font-style:italic}
-.admin-close{background:none;border:none;color:rgba(255,255,255,0.5);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:4px;transition:color 0.2s;font-family:var(--mono)}
-.admin-close:hover{color:var(--white)}
-.admin-body{padding:24px}
-.admin-section{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border)}
-.admin-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.admin-section-title{font-family:var(--mono);font-size:11px;color:var(--amber-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;font-weight:500}
-.form-row{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
-.form-input{flex:1;border:1px solid var(--border);border-radius:4px;padding:9px 12px;font-size:13px;font-family:var(--sans);color:var(--ink);background:var(--bg);outline:none;transition:border-color 0.2s}
-.form-input:focus{border-color:var(--amber)}
-.form-select{border:1px solid var(--border);border-radius:4px;padding:9px 12px;font-size:13px;font-family:var(--mono);color:var(--ink);background:var(--bg);outline:none;cursor:pointer}
-.form-select:focus{border-color:var(--amber)}
-.btn-add{background:var(--ink);color:var(--white);border:none;border-radius:4px;padding:9px 18px;font-family:var(--mono);font-size:12px;cursor:pointer;transition:background 0.2s;white-space:nowrap;font-weight:500}
+.ftrigger{font-size:11px;font-family:var(--mono);color:rgba(255,255,255,0.15);cursor:pointer;user-select:none;transition:color 0.2s}
+.ftrigger:hover{color:rgba(255,255,255,0.4)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.overlay.open{display:flex}
+.abox{background:var(--white);border-radius:8px;width:100%;max-width:720px;margin:auto}
+.ahead{background:var(--ink);padding:18px 24px;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between}
+.atitle{font-family:var(--serif);font-size:20px;color:var(--white);font-style:italic}
+.aclose{background:none;border:none;color:rgba(255,255,255,0.5);font-size:20px;cursor:pointer;padding:4px 8px;font-family:var(--mono)}
+.aclose:hover{color:var(--white)}
+.abody{padding:24px}
+.asec{margin-bottom:26px;padding-bottom:26px;border-bottom:1px solid var(--border)}
+.asec:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.asec-title{font-family:var(--mono);font-size:10px;color:var(--amber-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;font-weight:500}
+.frow{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.fi{flex:1;min-width:120px;border:1px solid var(--border);border-radius:4px;padding:8px 12px;font-size:13px;font-family:var(--sans);color:var(--ink);background:var(--bg);outline:none;transition:border-color 0.2s}
+.fi:focus{border-color:var(--amber)}
+.fsel{border:1px solid var(--border);border-radius:4px;padding:8px 12px;font-size:12px;font-family:var(--mono);color:var(--ink);background:var(--bg);outline:none;cursor:pointer}
+.fsel:focus{border-color:var(--amber)}
+.btn-add{background:var(--ink);color:var(--white);border:none;border-radius:4px;padding:8px 16px;font-family:var(--mono);font-size:12px;cursor:pointer;white-space:nowrap;font-weight:500}
 .btn-add:hover{background:var(--ink2)}
-.btn-del{background:var(--red-bg);color:var(--red);border:1px solid #f5c0bb;border-radius:4px;padding:6px 12px;font-family:var(--mono);font-size:11px;cursor:pointer;transition:background 0.2s}
-.btn-del:hover{background:#fbe0de}
-.admin-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-.admin-list-item{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:10px 14px}
-.admin-list-item-text{font-size:13px;color:var(--ink);flex:1;min-width:0}
-.admin-list-item-sub{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.wa-input-wrap{display:flex;gap:10px;align-items:center}
-.btn-save{background:var(--amber);color:var(--ink);border:none;border-radius:4px;padding:9px 20px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;transition:background 0.2s}
+.btn-save{background:var(--amber);color:var(--ink);border:none;border-radius:4px;padding:8px 18px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer}
 .btn-save:hover{background:#c07c08}
-.save-note{font-size:12px;color:var(--ink3);margin-top:8px;font-family:var(--mono)}
-
-/* ── PASSWORD GATE ── */
-.pw-gate{display:flex;flex-direction:column;gap:12px;align-items:center;padding:48px 24px}
-.pw-gate label{font-family:var(--mono);font-size:13px;color:var(--ink2);letter-spacing:1px}
-.pw-input{border:1px solid var(--border);border-radius:4px;padding:10px 16px;font-size:14px;font-family:var(--mono);color:var(--ink);width:240px;text-align:center;outline:none;background:var(--bg)}
-.pw-input:focus{border-color:var(--amber)}
-.pw-btn{background:var(--ink);color:var(--white);border:none;border-radius:4px;padding:10px 28px;font-family:var(--mono);font-size:13px;cursor:pointer;font-weight:500}
-.pw-error{font-family:var(--mono);font-size:12px;color:var(--red);display:none}
-
-/* ── RESPONSIVE ── */
-@media(max-width:700px){
-  .hero{grid-template-columns:1fr;padding:48px 24px}
-  .hero-right{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;flex-direction:row;flex-wrap:wrap}
-  .stat-row{flex:1;min-width:120px;border-bottom:none;border-right:1px solid rgba(255,255,255,0.07)}
-  .wa-section{grid-template-columns:1fr;padding:48px 24px;gap:28px}
-  footer{padding:24px}
-  .main{padding:0 20px}
-  nav{padding:0 20px}
-  .form-row{flex-wrap:wrap}
+.btn-del{background:var(--red-bg);color:var(--red);border:1px solid #f5c0bb;border-radius:4px;padding:5px 10px;font-family:var(--mono);font-size:10px;cursor:pointer;white-space:nowrap}
+.btn-del:hover{background:#fbe0de}
+.alist{display:flex;flex-direction:column;gap:7px;margin-top:10px}
+.aitem{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:9px 12px}
+.aitem-text{font-size:13px;color:var(--ink);flex:1;min-width:0}
+.aitem-sub{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fnote{font-size:11px;color:var(--ink3);font-family:var(--mono);margin-top:6px;line-height:1.6}
+.pwgate{display:flex;flex-direction:column;align-items:center;gap:12px;padding:48px 24px}
+.pwgate label{font-family:var(--mono);font-size:12px;color:var(--ink2);letter-spacing:1px}
+.pwinput{border:1px solid var(--border);border-radius:4px;padding:10px 16px;font-size:14px;font-family:var(--mono);color:var(--ink);width:240px;text-align:center;outline:none;background:var(--bg)}
+.pwinput:focus{border-color:var(--amber)}
+.pwbtn{background:var(--ink);color:var(--white);border:none;border-radius:4px;padding:10px 28px;font-family:var(--mono);font-size:13px;cursor:pointer;font-weight:500}
+.pwerr{font-family:var(--mono);font-size:12px;color:var(--red);display:none}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding:40px 20px}
+  .hero-right{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;flex-direction:row;flex-wrap:wrap}
+  .stat-row{flex:1;min-width:100px;border-bottom:none;padding:14px 8px}
+  .wa-section{grid-template-columns:1fr;padding:40px 20px;gap:24px}
+  footer{padding:20px}
+  .main{padding:0 16px}
+  nav{padding:0 16px}
+  .sem-layout{grid-template-columns:1fr}
+  .cat-list{flex-direction:row;flex-wrap:wrap}
+  .cat-btn{width:auto;padding:7px 12px;font-size:12px}
+  .cat-cnt{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo"><strong>EE</strong> Hub <em>GTU</em></div>
   <div class="nav-right">
     <a class="nav-link" href="#notices">Notices</a>
-    <a class="nav-link" href="#papers">Papers</a>
-    <a class="nav-link" href="#resources">Resources</a>
-    <div class="nav-pill" id="live-dot">● Live</div>
+    <a class="nav-link" href="#semesters">Semesters</a>
+    <a class="nav-link" href="#wa">WhatsApp</a>
+    <div class="nav-pill">● Live</div>
   </div>
 </nav>
-
 <div class="divider-bar"></div>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-left">
+  <div>
     <div class="hero-eyebrow">Electrical Engineering · GTU · Ahmedabad</div>
     <h1>Resources<br>from your<br><em>seniors.</em></h1>
-    <p class="hero-sub">Papers, notes, notices — curated by seniors who've been through it. Everything in one place, no searching required.</p>
+    <p class="hero-sub">Papers, notes, notices — organised semester-wise. Everything you need, one place.</p>
   </div>
   <div class="hero-right">
-    <div class="stat-row"><div class="stat-num" id="stat-papers">0</div><div class="stat-label">Exam papers</div></div>
-    <div class="stat-row"><div class="stat-num" id="stat-resources">0</div><div class="stat-label">Resources</div></div>
-    <div class="stat-row"><div class="stat-num">6</div><div class="stat-label">Semesters covered</div></div>
-    <div class="stat-row"><div class="stat-num">∞</div><div class="stat-label">Good luck given</div></div>
+    <div class="stat-row"><div class="stat-num" id="stat-p">0</div><div class="stat-label">Files uploaded</div></div>
+    <div class="stat-row"><div class="stat-num" id="stat-n">0</div><div class="stat-label">Active notices</div></div>
+    <div class="stat-row"><div class="stat-num">6</div><div class="stat-label">Semesters</div></div>
+    <div class="stat-row"><div class="stat-num">∞</div><div class="stat-label">Good luck</div></div>
   </div>
 </div>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="ticker-track">
-    <!-- filled by JS -->
-  </div>
-</div>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker-track"></div></div>
 
 <div class="main">
 
-  <!-- NOTICES -->
-  <div class="section" id="notices">
-    <div class="sec-label">01 — Notices</div>
-    <div class="sec-title">What's happening</div>
-    <div class="notices" id="notices-list">
-      <!-- filled by JS -->
-    </div>
-  </div>
+<div class="section" id="notices">
+  <div class="sec-label">Notices</div>
+  <div class="sec-title">What's happening</div>
+  <div class="notices" id="notices-list"></div>
+</div>
 
-  <!-- PAPERS -->
-  <div class="section" id="papers">
-    <div class="sec-label">02 — Papers</div>
-    <div class="sec-title">Mid-sem & GTU papers</div>
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('midsem')">Mid-sem</button>
-      <button class="tab" onclick="switchTab('gtu')">GTU Papers</button>
-      <button class="tab" onclick="switchTab('solved')">Solved</button>
-    </div>
-    <div class="panel active" id="panel-midsem"><div class="papers-grid" id="grid-midsem"></div></div>
-    <div class="panel" id="panel-gtu"><div class="papers-grid" id="grid-gtu"></div></div>
-    <div class="panel" id="panel-solved"><div class="papers-grid" id="grid-solved"></div></div>
+<div class="section" id="semesters">
+  <div class="sec-label">Resources</div>
+  <div class="sec-title">Browse by semester</div>
+  <div class="sem-nav">
+    <button class="sem-btn active" onclick="switchSem(1,this)">Sem 1</button>
+    <button class="sem-btn" onclick="switchSem(2,this)">Sem 2</button>
+    <button class="sem-btn" onclick="switchSem(3,this)">Sem 3</button>
+    <button class="sem-btn" onclick="switchSem(4,this)">Sem 4</button>
+    <button class="sem-btn" onclick="switchSem(5,this)">Sem 5</button>
+    <button class="sem-btn" onclick="switchSem(6,this)">Sem 6</button>
   </div>
-
-  <!-- RESOURCES -->
-  <div class="section" id="resources">
-    <div class="sec-label">03 — Resources</div>
-    <div class="sec-title">Study material</div>
-    <div class="resource-grid" id="resource-grid"></div>
-  </div>
+  <div id="sem-panels"></div>
+</div>
 
 </div>
 
-<!-- WHATSAPP -->
-<div class="wa-section">
+<div class="wa-section" id="wa">
   <div>
     <div class="wa-heading">Stay in the loop.</div>
-    <p class="wa-sub">New papers, emergency notices, exam tips — all on WhatsApp. Your seniors are one message away, always.</p>
+    <p class="wa-sub">New papers, notices, exam tips — all on WhatsApp. Your seniors are one message away.</p>
   </div>
   <a class="wa-btn" id="wa-btn" href="#" target="_blank">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -265,396 +218,335 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
   </a>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-left">Made with care by <strong>EE Seniors</strong> · GTU · Ahmedabad</div>
-  <!-- Secret admin trigger - looks like a version number -->
-  <div class="footer-right" id="admin-trigger" title="">EE HUB v1.0</div>
+  <div class="ftrigger" id="admin-trigger">EE HUB v2.0</div>
 </footer>
 
 <!-- ADMIN OVERLAY -->
-<div class="admin-overlay" id="admin-overlay">
-  <div class="admin-box">
-
-    <!-- Password Gate -->
-    <div id="pw-gate-wrap">
-      <div class="admin-header">
-        <div class="admin-title">Admin Access</div>
-        <button class="admin-close" onclick="closeAdmin()">✕</button>
-      </div>
-      <div class="pw-gate">
+<div class="overlay" id="overlay">
+  <div class="abox">
+    <div id="pw-wrap">
+      <div class="ahead"><div class="atitle">Admin Access</div><button class="aclose" onclick="closeAdmin()">✕</button></div>
+      <div class="pwgate">
         <label>ENTER ADMIN PASSWORD</label>
-        <input class="pw-input" type="password" id="pw-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPw()">
-        <button class="pw-btn" onclick="checkPw()">Unlock</button>
-        <div class="pw-error" id="pw-error">Incorrect password. Try again.</div>
+        <input class="pwinput" type="password" id="pw-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPw()">
+        <button class="pwbtn" onclick="checkPw()">Unlock</button>
+        <div class="pwerr" id="pw-err">Wrong password. Try again.</div>
       </div>
     </div>
+    <div id="admin-wrap" style="display:none">
+      <div class="ahead"><div class="atitle">EE Hub — Admin Panel</div><button class="aclose" onclick="closeAdmin()">✕</button></div>
+      <div class="abody">
 
-    <!-- Admin Panel (hidden until pw correct) -->
-    <div id="admin-panel-wrap" style="display:none">
-      <div class="admin-header">
-        <div class="admin-title">EE Hub — Admin Panel</div>
-        <button class="admin-close" onclick="closeAdmin()">✕</button>
-      </div>
-      <div class="admin-body">
-
-        <!-- WhatsApp Link -->
-        <div class="admin-section">
-          <div class="admin-section-title">WhatsApp Group Link</div>
-          <div class="wa-input-wrap">
-            <input class="form-input" type="text" id="wa-link-input" placeholder="https://chat.whatsapp.com/...">
-            <button class="btn-save" onclick="saveWaLink()">Save</button>
+        <div class="asec">
+          <div class="asec-title">WhatsApp Group Link</div>
+          <div class="frow">
+            <input class="fi" type="text" id="wa-input" placeholder="https://chat.whatsapp.com/...">
+            <button class="btn-save" onclick="saveWa()">Save</button>
           </div>
-          <div class="save-note">Paste your WhatsApp invite link above and click Save.</div>
         </div>
 
-        <!-- Notices -->
-        <div class="admin-section">
-          <div class="admin-section-title">Add Notice</div>
-          <div class="form-row">
-            <input class="form-input" type="text" id="notice-title-input" placeholder="Notice title...">
-            <select class="form-select" id="notice-type-select">
+        <div class="asec">
+          <div class="asec-title">Add Notice</div>
+          <div class="frow">
+            <input class="fi" type="text" id="n-title" placeholder="Notice text...">
+            <select class="fsel" id="n-type">
               <option value="urgent">Urgent</option>
               <option value="new" selected>New</option>
               <option value="info">Info</option>
             </select>
             <button class="btn-add" onclick="addNotice()">+ Add</button>
           </div>
-          <div class="admin-list" id="admin-notices-list"></div>
+          <div class="alist" id="admin-notices"></div>
         </div>
 
-        <!-- Papers -->
-        <div class="admin-section">
-          <div class="admin-section-title">Add Paper</div>
-          <div class="form-row">
-            <input class="form-input" type="text" id="paper-sem-input" placeholder="e.g. SEM 4 · 2025–26">
-            <input class="form-input" type="text" id="paper-subject-input" placeholder="Subject name">
-          </div>
-          <div class="form-row">
-            <input class="form-input" type="text" id="paper-code-input" placeholder="Code e.g. EE401">
-            <input class="form-input" type="text" id="paper-link-input" placeholder="Google Drive link">
-            <select class="form-select" id="paper-cat-select">
-              <option value="midsem">Mid-sem</option>
-              <option value="gtu">GTU</option>
-              <option value="solved">Solved</option>
+        <div class="asec">
+          <div class="asec-title">Add Paper / Notes / Resource</div>
+          <div class="frow">
+            <select class="fsel" id="p-sem">
+              <option value="1">Sem 1</option><option value="2">Sem 2</option>
+              <option value="3">Sem 3</option><option value="4">Sem 4</option>
+              <option value="5">Sem 5</option><option value="6">Sem 6</option>
             </select>
-            <button class="btn-add" onclick="addPaper()">+ Add</button>
+            <select class="fsel" id="p-cat">
+              <option value="midsem">Mid-sem Paper</option>
+              <option value="gtu">GTU Paper</option>
+              <option value="solved">Solved Paper</option>
+              <option value="notes">Notes / PDF</option>
+              <option value="resource">Resource / Link</option>
+            </select>
           </div>
-          <div class="admin-list" id="admin-papers-list"></div>
+          <div class="frow">
+            <input class="fi" type="text" id="p-name" placeholder="Subject name (e.g. Basic Electrical Engineering)">
+            <input class="fi" type="text" id="p-year" placeholder="Year (e.g. 2024-25)">
+          </div>
+          <div class="frow">
+            <input class="fi" type="text" id="p-link" placeholder="Google Drive / PDF link">
+            <input class="fi" style="max-width:140px" type="text" id="p-code" placeholder="Code (optional)">
+            <button class="btn-add" onclick="addItem()">+ Add</button>
+          </div>
+          <div class="fnote">Tip: In Google Drive, right-click file → Share → "Anyone with the link can view" → Copy link and paste above.</div>
+          <div class="alist" id="admin-items"></div>
         </div>
 
-        <!-- Resources -->
-        <div class="admin-section">
-          <div class="admin-section-title">Add Resource</div>
-          <div class="form-row">
-            <input class="form-input" type="text" id="res-name-input" placeholder="Resource name">
-            <input class="form-input" type="text" id="res-sub-input" placeholder="Short description">
-            <input class="form-input" type="text" id="res-link-input" placeholder="Link URL">
-            <button class="btn-add" onclick="addResource()">+ Add</button>
-          </div>
-          <div class="admin-list" id="admin-res-list"></div>
-        </div>
-
-        <!-- Ticker -->
-        <div class="admin-section">
-          <div class="admin-section-title">Ticker Messages</div>
-          <div class="form-row">
-            <input class="form-input" type="text" id="ticker-input" placeholder="Add a scrolling message...">
+        <div class="asec">
+          <div class="asec-title">Scrolling Ticker Messages</div>
+          <div class="frow">
+            <input class="fi" type="text" id="ticker-input" placeholder="Short announcement message...">
             <button class="btn-add" onclick="addTicker()">+ Add</button>
           </div>
-          <div class="admin-list" id="admin-ticker-list"></div>
+          <div class="alist" id="admin-ticker"></div>
         </div>
 
       </div>
     </div>
-
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════
-// CHANGE THIS PASSWORD TO SOMETHING ONLY YOU KNOW
-// ══════════════════════════════════════════════
-const ADMIN_PASSWORD = "eehub2026";
+// ═══════════════════════════════════════════════════
+//  CHANGE THIS PASSWORD TO YOUR OWN BEFORE UPLOADING
+// ═══════════════════════════════════════════════════
+const PASS = "eehub2026";
 
-// ── DEFAULT DATA ──
-const defaultData = {
-  waLink: "https://chat.whatsapp.com/YOUR_INVITE_LINK_HERE",
-  notices: [
-    { title: "Internal exam schedule released — Sem 4 & 6", type: "urgent", date: "10 Apr 2026" },
-    { title: "Mid-sem papers for Electrical Machines, Power Systems & EMT uploaded", type: "new", date: "8 Apr 2026" },
-    { title: "Study group forming for Power Electronics — DM to join", type: "new", date: "5 Apr 2026" },
-    { title: "Lab viva syllabus clarification from HOD — must read", type: "info", date: "2 Apr 2026" },
-    { title: "Updated lab manual for Electrical Measurements — 2026 syllabus", type: "info", date: "28 Mar 2026" }
+const CAT_LABEL = {midsem:"Mid-sem Papers",gtu:"GTU Papers",solved:"Solved Papers",notes:"Notes & PDFs",resource:"Resources"};
+const CAT_ICON  = {midsem:"📝",gtu:"📋",solved:"✅",notes:"📄",resource:"🔗"};
+const CATS = ["midsem","gtu","solved","notes","resource"];
+
+const DEF = {
+  waLink:"https://chat.whatsapp.com/YOUR_LINK_HERE",
+  notices:[
+    {title:"Internal exam schedule released — Sem 4 & 6",type:"urgent",date:"10 Apr 2026"},
+    {title:"Mid-sem papers for Electrical Machines & Power Systems uploaded",type:"new",date:"8 Apr 2026"},
+    {title:"Lab viva syllabus from HOD — please read",type:"info",date:"2 Apr 2026"}
   ],
-  papers: [
-    { sem: "SEM 3 · 2025–26", subject: "Circuit Theory & Networks", code: "EE301", link: "#", solved: true, cat: "midsem" },
-    { sem: "SEM 3 · 2025–26", subject: "Electromagnetic Theory", code: "EE302", link: "#", solved: false, cat: "midsem" },
-    { sem: "SEM 4 · 2025–26", subject: "Electrical Machines – I", code: "EE401", link: "#", solved: true, cat: "midsem" },
-    { sem: "SEM 4 · 2025–26", subject: "Power Systems – I", code: "EE402", link: "#", solved: false, cat: "midsem" },
-    { sem: "SEM 5 · 2024–25", subject: "Power Electronics", code: "EE501", link: "#", solved: true, cat: "midsem" },
-    { sem: "SEM 5 · 2024–25", subject: "Control Systems", code: "EE502", link: "#", solved: false, cat: "midsem" },
-    { sem: "GTU · 2019–2024", subject: "Electrical Machines (All Years)", code: "5 papers", link: "#", solved: false, cat: "gtu" },
-    { sem: "GTU · 2019–2024", subject: "Power Systems (All Years)", code: "5 papers", link: "#", solved: false, cat: "gtu" },
-    { sem: "GTU · 2020–2024", subject: "Control Systems", code: "4 papers", link: "#", solved: false, cat: "gtu" },
-    { sem: "GTU · 2019–2024", subject: "Power Electronics", code: "5 papers", link: "#", solved: false, cat: "gtu" },
-    { sem: "SEM 3 · MID-SEM", subject: "Circuit Theory — Solved by seniors", code: "EE301", link: "#", solved: true, cat: "solved" },
-    { sem: "SEM 4 · MID-SEM", subject: "Electrical Machines — Solved", code: "EE401", link: "#", solved: true, cat: "solved" },
-    { sem: "SEM 5 · MID-SEM", subject: "Power Electronics — Solved", code: "EE501", link: "#", solved: true, cat: "solved" }
+  items:[
+    {sem:1,cat:"notes",name:"Basic Electrical Engineering Notes",year:"2025",link:"#",code:"EE101"},
+    {sem:1,cat:"midsem",name:"Engineering Mathematics Mid-sem",year:"2024-25",link:"#",code:"MA101"},
+    {sem:2,cat:"midsem",name:"Network Analysis Mid-sem",year:"2024-25",link:"#",code:"EE201"},
+    {sem:2,cat:"notes",name:"Engineering Physics Notes",year:"2025",link:"#",code:"PH201"},
+    {sem:3,cat:"midsem",name:"Circuit Theory & Networks",year:"2024-25",link:"#",code:"EE301"},
+    {sem:3,cat:"gtu",name:"Electromagnetic Theory (GTU 2019-24)",year:"2019-24",link:"#",code:"EE302"},
+    {sem:3,cat:"solved",name:"Circuit Theory Solved Paper",year:"2024",link:"#",code:"EE301"},
+    {sem:4,cat:"midsem",name:"Electrical Machines – I",year:"2024-25",link:"#",code:"EE401"},
+    {sem:4,cat:"gtu",name:"Power Systems – I (GTU all years)",year:"2019-24",link:"#",code:"EE402"},
+    {sem:4,cat:"notes",name:"Electrical Machines Handwritten Notes",year:"2025",link:"#",code:""},
+    {sem:5,cat:"midsem",name:"Power Electronics",year:"2024-25",link:"#",code:"EE501"},
+    {sem:5,cat:"gtu",name:"Control Systems (GTU 2020-24)",year:"2020-24",link:"#",code:"EE502"},
+    {sem:5,cat:"solved",name:"Power Electronics Solved Paper",year:"2024",link:"#",code:"EE501"},
+    {sem:6,cat:"midsem",name:"Power System Protection",year:"2024-25",link:"#",code:"EE601"},
+    {sem:6,cat:"notes",name:"High Voltage Engineering Notes",year:"2025",link:"#",code:"EE602"},
+    {sem:6,cat:"resource",name:"NPTEL Power Electronics Lectures",year:"Free",link:"#",code:""}
   ],
-  resources: [
-    { name: "Handwritten Notes", sub: "by seniors · all sem", link: "#", icon: "📄", count: "34 files" },
-    { name: "Video Lectures", sub: "curated playlists", link: "#", icon: "🎥", count: "12 playlists" },
-    { name: "Lab Programs", sub: "MATLAB, circuits", link: "#", icon: "⚡", count: "60+ files" },
-    { name: "PPTs & Slides", sub: "sem 3–6 all subjects", link: "#", icon: "📊", count: "22 files" },
-    { name: "Syllabus & Docs", sub: "GTU official + explained", link: "#", icon: "📋", count: "6 files" },
-    { name: "Useful Links", sub: "tools, refs, internships", link: "#", icon: "🔗", count: "40+ links" }
-  ],
-  ticker: [
-    "Mid-sem papers uploaded for Sem 3 & 4",
-    "Join WhatsApp group for instant updates",
-    "GTU papers 2019–2024 now available",
-    "Internal exam schedule posted — check notices",
-    "New: Circuit Theory notes added by Sem 5 batch",
-    "Attendance policy update from department"
-  ]
+  ticker:["Mid-sem papers uploaded — check your semester","Join WhatsApp for instant updates","GTU papers 2019–2024 available","New notes added for Sem 4 & 5","Check notices for latest updates"]
 };
 
-// ── LOAD DATA ──
-function load() {
-  try { return JSON.parse(localStorage.getItem("eehub_data")) || defaultData; }
-  catch(e) { return defaultData; }
-}
-function save(data) { localStorage.setItem("eehub_data", JSON.stringify(data)); }
+function load(){try{return JSON.parse(localStorage.getItem("eehub_v2"))||DEF}catch(e){return DEF}}
+function save(d){localStorage.setItem("eehub_v2",JSON.stringify(d))}
+let D = load();
 
-let data = load();
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function today(){return new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
 
-// ── RENDER ──
-function renderAll() {
-  renderNotices();
-  renderPapers();
-  renderResources();
+let activeSem = 1;
+let activeCat = {};
+
+function renderAll(){
   renderTicker();
+  renderNotices();
+  buildSemPanels();
   updateStats();
-  updateWaBtn();
+  document.getElementById('wa-btn').href = D.waLink||'#';
 }
 
-function renderNotices() {
-  const el = document.getElementById("notices-list");
-  if (!data.notices.length) { el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--ink3);font-family:var(--mono);font-size:13px">No notices yet.</div>'; return; }
-  el.innerHTML = data.notices.map(n => `
+function renderTicker(){
+  const msgs = D.ticker.length ? D.ticker : ["Welcome to EE Hub"];
+  const doubled = [...msgs,...msgs];
+  document.getElementById('ticker-track').innerHTML = doubled.map(t=>
+    `<div class="ticker-item">${esc(t)} <span style="opacity:.4">·</span></div>`).join('');
+}
+
+function renderNotices(){
+  const el = document.getElementById('notices-list');
+  if(!D.notices.length){
+    el.innerHTML='<div style="padding:20px 24px;color:var(--ink3);font-family:var(--mono);font-size:13px">No notices yet.</div>';return;
+  }
+  el.innerHTML = D.notices.map(n=>`
     <div class="notice">
-      <div class="notice-stripe stripe-${n.type === 'urgent' ? 'red' : n.type === 'new' ? 'amber' : 'blue'}"></div>
-      <div class="notice-body">
-        <div class="notice-title">${esc(n.title)}</div>
-        <div class="notice-meta">${esc(n.date)} · Posted by Senior</div>
-      </div>
-      <div class="notice-badge badge-${n.type}">${n.type.toUpperCase()}</div>
+      <div class="nstripe s-${n.type==='urgent'?'red':n.type==='new'?'amber':'blue'}"></div>
+      <div class="nbody"><div class="ntitle">${esc(n.title)}</div><div class="nmeta">${esc(n.date)} · EE Hub</div></div>
+      <div class="nbadge b-${n.type}">${n.type.toUpperCase()}</div>
     </div>`).join('');
 }
 
-function renderPapers() {
-  ['midsem','gtu','solved'].forEach(cat => {
-    const el = document.getElementById('grid-' + cat);
-    const papers = data.papers.filter(p => p.cat === cat);
-    if (!papers.length) { el.innerHTML = '<div style="color:var(--ink3);font-family:var(--mono);font-size:13px;padding:12px">No papers added yet.</div>'; return; }
-    el.innerHTML = papers.map(p => `
-      <div class="paper-card">
-        <div class="paper-sem">${esc(p.sem)}</div>
-        <div class="paper-subject">${esc(p.subject)}</div>
-        <div class="paper-tags">
-          <span class="paper-tag">${esc(p.code)}</span>
-          ${p.solved ? '<span class="paper-tag solved">Solved</span>' : ''}
-          <span class="paper-tag">PDF</span>
-        </div>
-        <a class="dl-btn" href="${esc(p.link)}" target="_blank">↓ Download</a>
-      </div>`).join('');
-  });
-}
-
-function renderResources() {
-  const el = document.getElementById('resource-grid');
-  if (!data.resources.length) { el.innerHTML = '<div style="color:var(--ink3);font-family:var(--mono);font-size:13px">No resources added yet.</div>'; return; }
-  el.innerHTML = data.resources.map(r => `
-    <a class="res-card" href="${esc(r.link)}" target="_blank">
-      <div class="res-icon" style="font-size:18px">${r.icon || '📁'}</div>
-      <div class="res-name">${esc(r.name)}</div>
-      <div class="res-sub">${esc(r.sub)}</div>
-      <div class="res-count">→ ${esc(r.count || '')}</div>
-    </a>`).join('');
-}
-
-function renderTicker() {
-  const msgs = data.ticker.length ? data.ticker : ["Welcome to EE Hub!"];
-  const doubled = [...msgs, ...msgs];
-  document.getElementById('ticker-track').innerHTML = doubled.map(t =>
-    `<div class="ticker-item">${esc(t)} <span style="color:rgba(0,0,0,0.3)">·</span></div>`).join('');
-}
-
-function updateStats() {
-  document.getElementById('stat-papers').textContent = data.papers.length + '+';
-  document.getElementById('stat-resources').textContent = data.resources.length * 10 + '+';
-}
-
-function updateWaBtn() {
-  document.getElementById('wa-btn').href = data.waLink || '#';
-}
-
-function esc(s) {
-  if (!s) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// ── TABS ──
-function switchTab(id) {
-  document.querySelectorAll('.tab').forEach((t,i) => {
-    t.classList.toggle('active', ['midsem','gtu','solved'][i] === id);
-  });
-  document.querySelectorAll('.panel').forEach(p => {
-    p.classList.toggle('active', p.id === 'panel-' + id);
-  });
-}
-
-// ── ADMIN ──
-let adminUnlocked = false;
-
-document.getElementById('admin-trigger').addEventListener('click', function() {
-  document.getElementById('admin-overlay').classList.add('open');
-  if (adminUnlocked) {
-    showAdminPanel();
-  } else {
-    document.getElementById('pw-gate-wrap').style.display = '';
-    document.getElementById('admin-panel-wrap').style.display = 'none';
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-error').style.display = 'none';
-    setTimeout(() => document.getElementById('pw-input').focus(), 100);
+function buildSemPanels(){
+  const wrap = document.getElementById('sem-panels');
+  wrap.innerHTML = '';
+  for(let s=1;s<=6;s++){
+    if(!activeCat[s]) activeCat[s] = getFirstCat(s);
+    const div = document.createElement('div');
+    div.className = 'sem-panel'+(s===activeSem?' active':'');
+    div.id = 'sem-'+s;
+    div.innerHTML = buildSemHTML(s);
+    wrap.appendChild(div);
   }
+  // activate correct cat panels after DOM ready
+  for(let s=1;s<=6;s++) activatecat(s, activeCat[s]);
+}
+
+function getFirstCat(sem){
+  for(const c of CATS){ if(D.items.filter(i=>i.sem==sem&&i.cat===c).length) return c; }
+  return 'midsem';
+}
+
+function buildSemHTML(sem){
+  const sidebar = CATS.map(c=>{
+    const cnt = D.items.filter(i=>i.sem==sem&&i.cat===c).length;
+    return `<button class="cat-btn" id="cb-${sem}-${c}" onclick="switchCat(${sem},'${c}')">
+      <span>${CAT_ICON[c]} ${CAT_LABEL[c]}</span>
+      <span class="cat-cnt">${cnt}</span>
+    </button>`;
+  }).join('');
+
+  const panels = CATS.map(c=>{
+    const items = D.items.filter(i=>i.sem==sem&&i.cat===c);
+    let content = '';
+    if(!items.length){
+      content = `<div class="empty">No ${CAT_LABEL[c].toLowerCase()} for Semester ${sem} yet.<br>Check back soon — seniors upload regularly!</div>`;
+    } else if(c==='resource'){
+      content = `<div class="res-grid">${items.map(it=>`
+        <a class="res-card" href="${esc(it.link)}" target="_blank">
+          <div class="ricon">🔗</div>
+          <div class="rname">${esc(it.name)}</div>
+          <div class="rsub">${esc(it.year)}</div>
+          <div class="rcount">→ Open</div>
+        </a>`).join('')}</div>`;
+    } else {
+      content = `<div class="papers-grid">${items.map(it=>`
+        <div class="paper-card">
+          <div class="pyear">${esc(it.year)}</div>
+          <div class="pname">${esc(it.name)}</div>
+          <div class="ptags">
+            ${it.code?`<span class="ptag">${esc(it.code)}</span>`:''}
+            ${c==='solved'?'<span class="ptag solved">Solved</span>':''}
+            ${c==='gtu'?'<span class="ptag gtu">GTU</span>':''}
+            <span class="ptag">PDF</span>
+          </div>
+          <a class="dl-btn" href="${esc(it.link)}" target="_blank">↓ Download</a>
+        </div>`).join('')}</div>`;
+    }
+    return `<div class="cpanel" id="cp-${sem}-${c}">
+      <div class="cpanel-head">${CAT_ICON[c]} ${CAT_LABEL[c]} — Semester ${sem}</div>
+      ${content}
+    </div>`;
+  }).join('');
+
+  return `<div class="sem-layout">
+    <div class="sem-sidebar">
+      <div class="sidebar-label">Categories</div>
+      <div class="cat-list">${sidebar}</div>
+    </div>
+    <div class="content-area">${panels}</div>
+  </div>`;
+}
+
+function activatecat(sem, cat){
+  CATS.forEach(c=>{
+    const btn = document.getElementById('cb-'+sem+'-'+c);
+    const panel = document.getElementById('cp-'+sem+'-'+c);
+    if(btn) btn.classList.toggle('active', c===cat);
+    if(panel) panel.classList.toggle('active', c===cat);
+  });
+}
+
+function switchCat(sem, cat){
+  activeCat[sem] = cat;
+  activatecat(sem, cat);
+}
+
+function switchSem(s, el){
+  activeSem = s;
+  document.querySelectorAll('.sem-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.sem-panel').forEach(p=>p.classList.remove('active'));
+  const panel = document.getElementById('sem-'+s);
+  if(panel) panel.classList.add('active');
+  if(!activeCat[s]) activeCat[s] = getFirstCat(s);
+  activatecat(s, activeCat[s]);
+}
+
+function updateStats(){
+  document.getElementById('stat-p').textContent = D.items.length;
+  document.getElementById('stat-n').textContent = D.notices.length;
+}
+
+// ── ADMIN ──────────────────────────────────────
+let unlocked = false;
+document.getElementById('admin-trigger').addEventListener('click',()=>{
+  document.getElementById('overlay').classList.add('open');
+  if(unlocked) openPanel(); else resetPw();
 });
-
-function closeAdmin() {
-  document.getElementById('admin-overlay').classList.remove('open');
+function closeAdmin(){document.getElementById('overlay').classList.remove('open')}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeAdmin()});
+function resetPw(){
+  document.getElementById('pw-wrap').style.display='';
+  document.getElementById('admin-wrap').style.display='none';
+  document.getElementById('pw-input').value='';
+  document.getElementById('pw-err').style.display='none';
+  setTimeout(()=>document.getElementById('pw-input').focus(),100);
 }
-
-document.getElementById('admin-overlay').addEventListener('click', function(e) {
-  if (e.target === this) closeAdmin();
-});
-
-function checkPw() {
-  const val = document.getElementById('pw-input').value;
-  if (val === ADMIN_PASSWORD) {
-    adminUnlocked = true;
-    showAdminPanel();
-  } else {
-    document.getElementById('pw-error').style.display = 'block';
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-input').focus();
-  }
+function checkPw(){
+  if(document.getElementById('pw-input').value===PASS){unlocked=true;openPanel();}
+  else{document.getElementById('pw-err').style.display='block';document.getElementById('pw-input').value='';document.getElementById('pw-input').focus();}
 }
-
-function showAdminPanel() {
-  document.getElementById('pw-gate-wrap').style.display = 'none';
-  document.getElementById('admin-panel-wrap').style.display = '';
-  document.getElementById('wa-link-input').value = data.waLink || '';
+function openPanel(){
+  document.getElementById('pw-wrap').style.display='none';
+  document.getElementById('admin-wrap').style.display='';
+  document.getElementById('wa-input').value = D.waLink||'';
   renderAdminLists();
 }
-
-function renderAdminLists() {
-  // notices
-  const nl = document.getElementById('admin-notices-list');
-  nl.innerHTML = data.notices.map((n,i) => `
-    <div class="admin-list-item">
-      <div class="admin-list-item-text">${esc(n.title)}<div class="admin-list-item-sub">${n.type.toUpperCase()} · ${n.date}</div></div>
-      <button class="btn-del" onclick="deleteItem('notices',${i})">Delete</button>
-    </div>`).join('');
-
-  // papers
-  const pl = document.getElementById('admin-papers-list');
-  pl.innerHTML = data.papers.map((p,i) => `
-    <div class="admin-list-item">
-      <div class="admin-list-item-text">${esc(p.subject)}<div class="admin-list-item-sub">${p.sem} · ${p.cat} · ${p.code}</div></div>
-      <button class="btn-del" onclick="deleteItem('papers',${i})">Delete</button>
-    </div>`).join('');
-
-  // resources
-  const rl = document.getElementById('admin-res-list');
-  rl.innerHTML = data.resources.map((r,i) => `
-    <div class="admin-list-item">
-      <div class="admin-list-item-text">${esc(r.name)}<div class="admin-list-item-sub">${esc(r.sub)}</div></div>
-      <button class="btn-del" onclick="deleteItem('resources',${i})">Delete</button>
-    </div>`).join('');
-
-  // ticker
-  const tl = document.getElementById('admin-ticker-list');
-  tl.innerHTML = data.ticker.map((t,i) => `
-    <div class="admin-list-item">
-      <div class="admin-list-item-text">${esc(t)}</div>
-      <button class="btn-del" onclick="deleteItem('ticker',${i})">Delete</button>
-    </div>`).join('');
+function renderAdminLists(){
+  document.getElementById('admin-notices').innerHTML = D.notices.map((n,i)=>`
+    <div class="aitem"><div class="aitem-text">${esc(n.title)}<div class="aitem-sub">${n.type.toUpperCase()} · ${n.date}</div></div>
+    <button class="btn-del" onclick="del('notices',${i})">Delete</button></div>`).join('');
+  document.getElementById('admin-items').innerHTML = D.items.map((p,i)=>`
+    <div class="aitem"><div class="aitem-text">${esc(p.name)}<div class="aitem-sub">Sem ${p.sem} · ${CAT_LABEL[p.cat]} · ${p.year}</div></div>
+    <button class="btn-del" onclick="del('items',${i})">Delete</button></div>`).join('');
+  document.getElementById('admin-ticker').innerHTML = D.ticker.map((t,i)=>`
+    <div class="aitem"><div class="aitem-text">${esc(t)}</div>
+    <button class="btn-del" onclick="del('ticker',${i})">Delete</button></div>`).join('');
+}
+function del(key,i){D[key].splice(i,1);save(D);renderAll();renderAdminLists();}
+function saveWa(){D.waLink=document.getElementById('wa-input').value.trim();save(D);document.getElementById('wa-btn').href=D.waLink;alert('Saved!');}
+function addNotice(){
+  const t=document.getElementById('n-title').value.trim();
+  if(!t)return;
+  D.notices.unshift({title:t,type:document.getElementById('n-type').value,date:today()});
+  document.getElementById('n-title').value='';
+  save(D);renderAll();renderAdminLists();
+}
+function addItem(){
+  const name=document.getElementById('p-name').value.trim();
+  const link=document.getElementById('p-link').value.trim();
+  if(!name||!link){alert('Please fill in the name and the Google Drive link.');return;}
+  D.items.push({
+    sem:parseInt(document.getElementById('p-sem').value),
+    cat:document.getElementById('p-cat').value,
+    name,year:document.getElementById('p-year').value.trim(),
+    link,code:document.getElementById('p-code').value.trim()
+  });
+  ['p-name','p-year','p-link','p-code'].forEach(id=>document.getElementById(id).value='');
+  save(D);renderAll();renderAdminLists();
+}
+function addTicker(){
+  const msg=document.getElementById('ticker-input').value.trim();
+  if(!msg)return;
+  D.ticker.push(msg);
+  document.getElementById('ticker-input').value='';
+  save(D);renderAll();renderAdminLists();
 }
 
-function deleteItem(key, idx) {
-  data[key].splice(idx, 1);
-  save(data);
-  renderAll();
-  renderAdminLists();
-}
-
-function saveWaLink() {
-  data.waLink = document.getElementById('wa-link-input').value.trim();
-  save(data);
-  updateWaBtn();
-  alert('WhatsApp link saved!');
-}
-
-function addNotice() {
-  const title = document.getElementById('notice-title-input').value.trim();
-  const type = document.getElementById('notice-type-select').value;
-  if (!title) return;
-  const today = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
-  data.notices.unshift({ title, type, date: today });
-  save(data);
-  document.getElementById('notice-title-input').value = '';
-  renderAll();
-  renderAdminLists();
-}
-
-function addPaper() {
-  const sem = document.getElementById('paper-sem-input').value.trim();
-  const subject = document.getElementById('paper-subject-input').value.trim();
-  const code = document.getElementById('paper-code-input').value.trim();
-  const link = document.getElementById('paper-link-input').value.trim();
-  const cat = document.getElementById('paper-cat-select').value;
-  if (!subject || !link) { alert('Please fill in subject and link at minimum.'); return; }
-  data.papers.push({ sem, subject, code, link, solved: cat === 'solved', cat });
-  save(data);
-  ['paper-sem-input','paper-subject-input','paper-code-input','paper-link-input'].forEach(id => document.getElementById(id).value = '');
-  renderAll();
-  renderAdminLists();
-}
-
-function addResource() {
-  const name = document.getElementById('res-name-input').value.trim();
-  const sub = document.getElementById('res-sub-input').value.trim();
-  const link = document.getElementById('res-link-input').value.trim();
-  if (!name || !link) { alert('Please fill in name and link.'); return; }
-  data.resources.push({ name, sub, link, icon: '📁', count: '' });
-  save(data);
-  ['res-name-input','res-sub-input','res-link-input'].forEach(id => document.getElementById(id).value = '');
-  renderAll();
-  renderAdminLists();
-}
-
-function addTicker() {
-  const msg = document.getElementById('ticker-input').value.trim();
-  if (!msg) return;
-  data.ticker.push(msg);
-  save(data);
-  document.getElementById('ticker-input').value = '';
-  renderAll();
-  renderAdminLists();
-}
-
-// ── INIT ──
 renderAll();
 </script>
 </body>
