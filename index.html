@@ -623,7 +623,7 @@ async function addItem(){
   };
 
   try {
-    await addDoc(collection(db, "items"), item);
+    await addDoc(collection(window.db, "items"), item);
 
     // clear inputs
     ['p-name','p-year','p-link','p-code'].forEach(id=>{
