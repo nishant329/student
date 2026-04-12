@@ -66,18 +66,16 @@ nav{background:var(--ink);padding:0 32px;display:flex;align-items:center;justify
 .sem-panel{display:none}
 .sem-panel.active{display:block}
 .sem-layout{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start}
-.sem-sidebar{}
 .sidebar-label{font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .cat-list{display:flex;flex-direction:column;gap:3px}
 .cat-btn{font-size:13px;padding:9px 14px;border-radius:3px;cursor:pointer;border:none;background:transparent;color:var(--ink3);text-align:left;transition:all 0.15s;font-family:var(--sans);display:flex;justify-content:space-between;align-items:center;width:100%}
 .cat-btn:hover{background:var(--bg);color:var(--ink)}
 .cat-btn.active{background:var(--amber-light);color:var(--amber-dark);font-weight:500}
 .cat-cnt{font-family:var(--mono);font-size:10px;opacity:0.6}
-.content-area{}
 .cpanel{display:none}
 .cpanel.active{display:block}
 .cpanel-head{font-family:var(--mono);font-size:11px;color:var(--amber-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-.empty{padding:36px;text-align:center;color:var(--ink3);font-family:var(--mono);font-size:13px;background:var(--white);border:1px dashed var(--border);border-radius:4px;line-height:1.7}
+.empty{padding:36px;text-align:center;color:var(--ink3);font-family:var(--mono);font-size:13px;background:var(--white);border:1px dashed var(--border);border-radius:4px;line-height:1.8}
 .papers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
 .paper-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:18px;transition:border-color 0.2s}
 .paper-card:hover{border-color:var(--amber)}
@@ -106,6 +104,10 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 .footer-left strong{color:var(--amber)}
 .ftrigger{font-size:11px;font-family:var(--mono);color:rgba(255,255,255,0.15);cursor:pointer;user-select:none;transition:color 0.2s}
 .ftrigger:hover{color:rgba(255,255,255,0.4)}
+/* LOADING */
+.loading-bar{position:fixed;top:0;left:0;height:3px;background:var(--amber);width:0;transition:width 0.3s;z-index:9999}
+.loading-bar.done{width:100%;opacity:0;transition:width 0.3s,opacity 0.5s 0.3s}
+/* OVERLAY */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
 .overlay.open{display:flex}
 .abox{background:var(--white);border-radius:8px;width:100%;max-width:720px;margin:auto}
@@ -124,15 +126,19 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 .fsel:focus{border-color:var(--amber)}
 .btn-add{background:var(--ink);color:var(--white);border:none;border-radius:4px;padding:8px 16px;font-family:var(--mono);font-size:12px;cursor:pointer;white-space:nowrap;font-weight:500}
 .btn-add:hover{background:var(--ink2)}
+.btn-add:disabled{opacity:0.5;cursor:not-allowed}
 .btn-save{background:var(--amber);color:var(--ink);border:none;border-radius:4px;padding:8px 18px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer}
 .btn-save:hover{background:#c07c08}
 .btn-del{background:var(--red-bg);color:var(--red);border:1px solid #f5c0bb;border-radius:4px;padding:5px 10px;font-family:var(--mono);font-size:10px;cursor:pointer;white-space:nowrap}
 .btn-del:hover{background:#fbe0de}
-.alist{display:flex;flex-direction:column;gap:7px;margin-top:10px}
-.aitem{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:9px 12px}
+.alist{display:flex;flex-direction:column;gap:7px;margin-top:10px;max-height:220px;overflow-y:auto}
+.aitem{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:9px 12px;flex-shrink:0}
 .aitem-text{font-size:13px;color:var(--ink);flex:1;min-width:0}
 .aitem-sub{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fnote{font-size:11px;color:var(--ink3);font-family:var(--mono);margin-top:6px;line-height:1.6}
+.status-msg{font-family:var(--mono);font-size:12px;padding:8px 12px;border-radius:4px;margin-top:8px;display:none}
+.status-msg.ok{background:var(--green-bg);color:var(--green);display:block}
+.status-msg.err{background:var(--red-bg);color:var(--red);display:block}
 @media(max-width:768px){
   .hero{grid-template-columns:1fr;padding:40px 20px}
   .hero-right{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;flex-direction:row;flex-wrap:wrap}
@@ -149,6 +155,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 </style>
 </head>
 <body>
+
+<div class="loading-bar" id="loading-bar"></div>
 
 <nav>
   <div class="nav-logo"><strong>EE</strong> Hub <em>GTU</em></div>
@@ -168,36 +176,42 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
     <p class="hero-sub">Papers, notes, notices — organised semester-wise. Everything you need, one place.</p>
   </div>
   <div class="hero-right">
-    <div class="stat-row"><div class="stat-num" id="stat-p">0</div><div class="stat-label">Files uploaded</div></div>
-    <div class="stat-row"><div class="stat-num" id="stat-n">0</div><div class="stat-label">Active notices</div></div>
+    <div class="stat-row"><div class="stat-num" id="stat-p">—</div><div class="stat-label">Files uploaded</div></div>
+    <div class="stat-row"><div class="stat-num" id="stat-n">—</div><div class="stat-label">Active notices</div></div>
     <div class="stat-row"><div class="stat-num">6</div><div class="stat-label">Semesters</div></div>
     <div class="stat-row"><div class="stat-num">∞</div><div class="stat-label">Good luck</div></div>
   </div>
 </div>
 
-<div class="ticker-wrap"><div class="ticker-track" id="ticker-track"></div></div>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker-track">
+  <div class="ticker-item">Loading latest updates... <span style="opacity:.4">·</span></div>
+</div></div>
 
 <div class="main">
 
-<div class="section" id="notices">
-  <div class="sec-label">Notices</div>
-  <div class="sec-title">What's happening</div>
-  <div class="notices" id="notices-list"></div>
-</div>
-
-<div class="section" id="semesters">
-  <div class="sec-label">Resources</div>
-  <div class="sec-title">Browse by semester</div>
-  <div class="sem-nav">
-    <button class="sem-btn active" onclick="switchSem(1,this)">Sem 1</button>
-    <button class="sem-btn" onclick="switchSem(2,this)">Sem 2</button>
-    <button class="sem-btn" onclick="switchSem(3,this)">Sem 3</button>
-    <button class="sem-btn" onclick="switchSem(4,this)">Sem 4</button>
-    <button class="sem-btn" onclick="switchSem(5,this)">Sem 5</button>
-    <button class="sem-btn" onclick="switchSem(6,this)">Sem 6</button>
+  <div class="section" id="notices">
+    <div class="sec-label">Notices</div>
+    <div class="sec-title">What's happening</div>
+    <div class="notices" id="notices-list">
+      <div style="padding:20px 24px;color:var(--ink3);font-family:var(--mono);font-size:13px">Loading notices...</div>
+    </div>
   </div>
-  <div id="sem-panels"></div>
-</div>
+
+  <div class="section" id="semesters">
+    <div class="sec-label">Resources</div>
+    <div class="sec-title">Browse by semester</div>
+    <div class="sem-nav">
+      <button class="sem-btn active" onclick="switchSem(1,this)">Sem 1</button>
+      <button class="sem-btn" onclick="switchSem(2,this)">Sem 2</button>
+      <button class="sem-btn" onclick="switchSem(3,this)">Sem 3</button>
+      <button class="sem-btn" onclick="switchSem(4,this)">Sem 4</button>
+      <button class="sem-btn" onclick="switchSem(5,this)">Sem 5</button>
+      <button class="sem-btn" onclick="switchSem(6,this)">Sem 6</button>
+    </div>
+    <div id="sem-panels">
+      <div style="padding:40px;text-align:center;color:var(--ink3);font-family:var(--mono);font-size:13px">Loading resources...</div>
+    </div>
+  </div>
 
 </div>
 
@@ -220,8 +234,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 <!-- ADMIN OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="abox">
-    <!-- Only admin panel, no password UI -->
-    <div id="admin-wrap" style="display:none">
+    <div id="admin-wrap">
       <div class="ahead">
         <div class="atitle">EE Hub — Admin Panel</div>
         <button class="aclose" onclick="closeAdmin()">✕</button>
@@ -234,6 +247,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
             <input class="fi" type="text" id="wa-input" placeholder="https://chat.whatsapp.com/...">
             <button class="btn-save" onclick="saveWa()">Save</button>
           </div>
+          <div class="status-msg" id="wa-status"></div>
         </div>
 
         <div class="asec">
@@ -245,8 +259,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
               <option value="new" selected>New</option>
               <option value="info">Info</option>
             </select>
-            <button class="btn-add" onclick="addNotice()">+ Add</button>
+            <button class="btn-add" id="btn-notice" onclick="addNotice()">+ Add</button>
           </div>
+          <div class="status-msg" id="notice-status"></div>
           <div class="alist" id="admin-notices"></div>
         </div>
 
@@ -273,9 +288,10 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
           <div class="frow">
             <input class="fi" type="text" id="p-link" placeholder="Google Drive / PDF link">
             <input class="fi" style="max-width:140px" type="text" id="p-code" placeholder="Code (optional)">
-            <button class="btn-add" onclick="addItem()">+ Add</button>
+            <button class="btn-add" id="btn-item" onclick="addItem()">+ Add</button>
           </div>
           <div class="fnote">Tip: In Google Drive, right-click file → Share → "Anyone with the link can view" → Copy link and paste above.</div>
+          <div class="status-msg" id="item-status"></div>
           <div class="alist" id="admin-items"></div>
         </div>
 
@@ -283,8 +299,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
           <div class="asec-title">Scrolling Ticker Messages</div>
           <div class="frow">
             <input class="fi" type="text" id="ticker-input" placeholder="Short announcement message...">
-            <button class="btn-add" onclick="addTicker()">+ Add</button>
+            <button class="btn-add" id="btn-ticker" onclick="addTicker()">+ Add</button>
           </div>
+          <div class="status-msg" id="ticker-status"></div>
           <div class="alist" id="admin-ticker"></div>
         </div>
 
@@ -293,120 +310,72 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
   </div>
 </div>
 
-<!-- Firebase Google Login (module) -->
+<!-- ═══════════════════════════════════════════════════════
+     ALL FIREBASE LOGIC IN ONE MODULE SCRIPT
+     This fixes the "window.collection is not a function" error
+     by keeping everything inside the same module scope.
+════════════════════════════════════════════════════════ -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+import { initializeApp }                          from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore,
+  collection, doc,
+  addDoc, getDocs, deleteDoc, setDoc, getDoc,
+  onSnapshot, orderBy, query
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  import { getFirestore, collection, addDoc, getDocs } 
-  from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
-
-  
-  const firebaseConfig = {
-    apiKey: "AIzaSyCWSB5hd5tZVMoh3r-dctta7f91UztMzIs",
-    authDomain: "gec-bharuch-electrical.firebaseapp.com",
-    projectId: "gec-bharuch-electrical",
-    storageBucket: "gec-bharuch-electrical.firebasestorage.app",
-    messagingSenderId: "574095352204",
-    appId: "1:574095352204:web:67f8cc041b7f3069d276a9"
-  };
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  window.firebaseAPI = {
-    db,
-    collection,
-    addDoc,
-    getDocs
-  };
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
-  // Expose login function globally so non-module script can call it[web:21][web:33]
-  window.firebaseLogin = function () {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        // 🔐 Replace with your real Gmail
-        if (user.email === "gecbharuch69@gmail.com") {
-          document.getElementById('overlay').classList.add('open');
-          setTimeout(() => {
-            openPanel();
-          }, 100);
-        } else {
-          alert("Access Denied!");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Login failed. Try again.");
-      });
-  };
-</script>
-
-<script>
-// Original app JS (password logic removed)
-
-const CAT_LABEL = {midsem:"Mid-sem Papers",gtu:"GTU Papers",solved:"Solved Papers",notes:"Notes & PDFs",resource:"Resources"};
-const CAT_ICON  = {midsem:"📝",gtu:"📋",solved:"✅",notes:"📄",resource:"🔗"};
-const CATS = ["midsem","gtu","solved","notes","resource"];
-
-const DEF = {
-  waLink:"https://chat.whatsapp.com/KRTvtsgZH2jFXUkjKEaa5d",
-  visibleSems: {
-    1: true,
-    2: true,
-    3: false,
-    4: false,
-    5: false,
-    6: false
-  },
-  notices:[
-    {title:"Internal exam schedule released — Sem 4 & 6",type:"urgent",date:"10 Apr 2026"},
-    {title:"Mid-sem papers for Electrical Machines & Power Systems uploaded",type:"new",date:"8 Apr 2026"},
-    {title:"Lab viva syllabus from HOD — please read",type:"info",date:"2 Apr 2026"}
-  ],
-  items:[
-    {sem:1,cat:"notes",name:"Basic Electrical Engineering Notes",year:"2025",link:"#",code:"EE101"},
-    {sem:1,cat:"midsem",name:"Engineering Mathematics Mid-sem",year:"2024-25",link:"#",code:"MA101"},
-    {sem:2,cat:"midsem",name:"Network Analysis Mid-sem",year:"2024-25",link:"#",code:"EE201"},
-    {sem:2,cat:"notes",name:"Engineering Physics Notes",year:"2025",link:"#",code:"PH201"},
-    {sem:3,cat:"midsem",name:"Circuit Theory & Networks",year:"2024-25",link:"#",code:"EE301"},
-    {sem:3,cat:"gtu",name:"Electromagnetic Theory (GTU 2019-24)",year:"2019-24",link:"#",code:"EE302"},
-    {sem:3,cat:"solved",name:"Circuit Theory Solved Paper",year:"2024",link:"#",code:"EE301"},
-    {sem:4,cat:"midsem",name:"Electrical Machines – I",year:"2024-25",link:"#",code:"EE401"},
-    {sem:4,cat:"gtu",name:"Power Systems – I (GTU all years)",year:"2019-24",link:"#",code:"EE402"},
-    {sem:4,cat:"notes",name:"Electrical Machines Handwritten Notes",year:"2025",link:"#",code:""},
-    {sem:5,cat:"midsem",name:"Power Electronics",year:"2024-25",link:"#",code:"EE501"},
-    {sem:5,cat:"gtu",name:"Control Systems (GTU 2020-24)",year:"2020-24",link:"#",code:"EE502"},
-    {sem:5,cat:"solved",name:"Power Electronics Solved Paper",year:"2024",link:"#",code:"EE501"},
-    {sem:6,cat:"midsem",name:"Power System Protection",year:"2024-25",link:"#",code:"EE601"},
-    {sem:6,cat:"notes",name:"High Voltage Engineering Notes",year:"2025",link:"#",code:"EE602"},
-    {sem:6,cat:"resource",name:"NPTEL Power Electronics Lectures",year:"Free",link:"#",code:""}
-  ],
-  ticker:["Mid-sem papers uploaded — check your semester","Join WhatsApp for instant updates","GTU papers 2019–2024 available","New notes added for Sem 4 & 5","Check notices for latest updates"]
+// ── FIREBASE CONFIG ──────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyCWSB5hd5tZVMoh3r-dctta7f91UztMzIs",
+  authDomain: "gec-bharuch-electrical.firebaseapp.com",
+  projectId: "gec-bharuch-electrical",
+  storageBucket: "gec-bharuch-electrical.firebasestorage.app",
+  messagingSenderId: "574095352204",
+  appId: "1:574095352204:web:67f8cc041b7f3069d276a9"
 };
 
-function load(){try{return JSON.parse(localStorage.getItem("eehub_v2"))||DEF}catch(e){return DEF}}
-function save(d){localStorage.setItem("eehub_v2",JSON.stringify(d))}
-let D = load();
+// ══════════════════════════════════════════
+//  YOUR ADMIN GMAIL — only this can edit
+// ══════════════════════════════════════════
+const ADMIN_EMAIL = "gecbharuch69@gmail.com";
 
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function today(){return new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
 
+// ── HELPER REFS ─────────────────────────────────────────
+const col  = (name) => collection(db, name);
+const CAT_LABEL = {midsem:"Mid-sem Papers",gtu:"GTU Papers",solved:"Solved Papers",notes:"Notes & PDFs",resource:"Resources"};
+const CAT_ICON  = {midsem:"📝",gtu:"📋",solved:"✅",notes:"📄",resource:"🔗"};
+const CATS      = ["midsem","gtu","solved","notes","resource"];
+
+// ── LOCAL STATE ─────────────────────────────────────────
+let STATE = { items:[], notices:[], ticker:[], waLink:"#" };
 let activeSem = 1;
 let activeCat = {};
 
+// ── UTILS ───────────────────────────────────────────────
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function today(){return new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
+function setLoading(pct){ const b=document.getElementById('loading-bar'); b.style.width=pct+'%'; if(pct>=100){b.classList.add('done')} }
+function showStatus(id,msg,ok){
+  const el=document.getElementById(id);
+  el.textContent=msg; el.className='status-msg '+(ok?'ok':'err');
+  setTimeout(()=>{ el.style.display='none'; el.className='status-msg'; },3000);
+}
+
+// ── RENDER ───────────────────────────────────────────────
 function renderAll(){
   renderTicker();
   renderNotices();
   buildSemPanels();
   updateStats();
-  document.getElementById('wa-btn').href = D.waLink||'#';
+  document.getElementById('wa-btn').href = STATE.waLink||'#';
 }
 
 function renderTicker(){
-  const msgs = D.ticker.length ? D.ticker : ["Welcome to EE Hub"];
+  const msgs = STATE.ticker.length ? STATE.ticker.map(t=>t.text||t) : ["Welcome to EE Hub"];
   const doubled = [...msgs,...msgs];
   document.getElementById('ticker-track').innerHTML = doubled.map(t=>
     `<div class="ticker-item">${esc(t)} <span style="opacity:.4">·</span></div>`).join('');
@@ -414,10 +383,10 @@ function renderTicker(){
 
 function renderNotices(){
   const el = document.getElementById('notices-list');
-  if(!D.notices.length){
+  if(!STATE.notices.length){
     el.innerHTML='<div style="padding:20px 24px;color:var(--ink3);font-family:var(--mono);font-size:13px">No notices yet.</div>';return;
   }
-  el.innerHTML = D.notices.map(n=>`
+  el.innerHTML = STATE.notices.map(n=>`
     <div class="notice">
       <div class="nstripe s-${n.type==='urgent'?'red':n.type==='new'?'amber':'blue'}"></div>
       <div class="nbody"><div class="ntitle">${esc(n.title)}</div><div class="nmeta">${esc(n.date)} · EE Hub</div></div>
@@ -436,47 +405,40 @@ function buildSemPanels(){
     div.innerHTML = buildSemHTML(s);
     wrap.appendChild(div);
   }
-  for(let s=1;s<=6;s++) activatecat(s, activeCat[s]);
+  for(let s=1;s<=6;s++) activateCat(s, activeCat[s]);
 }
 
 function getFirstCat(sem){
-  for(const c of CATS){ if(D.items.filter(i=>i.sem==sem&&i.cat===c).length) return c; }
+  for(const c of CATS){ if(STATE.items.filter(i=>i.sem==sem&&i.cat===c).length) return c; }
   return 'midsem';
 }
 
 function buildSemHTML(sem){
-  if(D.visibleSems && !D.visibleSems[sem]){
-    return `<div class="empty">
-      🚧 <strong>Coming Soon</strong><br>
-      Content for Semester ${sem} will be uploaded soon.
-    </div>`;
-  }
-
   const sidebar = CATS.map(c=>{
-    const cnt = D.items.filter(i=>i.sem==sem&&i.cat===c).length;
-    return `<button class="cat-btn" id="cb-${sem}-${c}" onclick="switchCat(${sem},'${c}')">
+    const cnt = STATE.items.filter(i=>i.sem==sem&&i.cat===c).length;
+    return `<button class="cat-btn" id="cb-${sem}-${c}" onclick="window._switchCat(${sem},'${c}')">
       <span>${CAT_ICON[c]} ${CAT_LABEL[c]}</span>
       <span class="cat-cnt">${cnt}</span>
     </button>`;
   }).join('');
 
   const panels = CATS.map(c=>{
-    const items = D.items.filter(i=>i.sem==sem&&i.cat===c);
+    const items = STATE.items.filter(i=>i.sem==sem&&i.cat===c);
     let content = '';
     if(!items.length){
-      content = `<div class="empty">No ${CAT_LABEL[c].toLowerCase()} for Semester ${sem} yet.<br>Check back soon — seniors upload regularly!</div>`;
+      content = `<div class="empty">No ${CAT_LABEL[c].toLowerCase()} for Semester ${sem} yet.<br>Check back soon — seniors upload regularly! 📚</div>`;
     } else if(c==='resource'){
       content = `<div class="res-grid">${items.map(it=>`
         <a class="res-card" href="${esc(it.link)}" target="_blank">
           <div class="ricon">🔗</div>
           <div class="rname">${esc(it.name)}</div>
-          <div class="rsub">${esc(it.year)}</div>
+          <div class="rsub">${esc(it.year||'')}</div>
           <div class="rcount">→ Open</div>
         </a>`).join('')}</div>`;
     } else {
       content = `<div class="papers-grid">${items.map(it=>`
         <div class="paper-card">
-          <div class="pyear">${esc(it.year)}</div>
+          <div class="pyear">${esc(it.year||'')}</div>
           <div class="pname">${esc(it.name)}</div>
           <div class="ptags">
             ${it.code?`<span class="ptag">${esc(it.code)}</span>`:''}
@@ -502,21 +464,27 @@ function buildSemHTML(sem){
   </div>`;
 }
 
-function activatecat(sem, cat){
+function activateCat(sem, cat){
   CATS.forEach(c=>{
-    const btn = document.getElementById('cb-'+sem+'-'+c);
+    const btn   = document.getElementById('cb-'+sem+'-'+c);
     const panel = document.getElementById('cp-'+sem+'-'+c);
-    if(btn) btn.classList.toggle('active', c===cat);
+    if(btn)   btn.classList.toggle('active', c===cat);
     if(panel) panel.classList.toggle('active', c===cat);
   });
 }
 
-function switchCat(sem, cat){
-  activeCat[sem] = cat;
-  activatecat(sem, cat);
+function updateStats(){
+  document.getElementById('stat-p').textContent = STATE.items.length;
+  document.getElementById('stat-n').textContent = STATE.notices.length;
 }
 
-function switchSem(s, el){
+// ── EXPOSE UI HANDLERS TO HTML onclick ──────────────────
+window._switchCat = function(sem, cat){
+  activeCat[sem] = cat;
+  activateCat(sem, cat);
+};
+
+window.switchSem = function(s, el){
   activeSem = s;
   document.querySelectorAll('.sem-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
@@ -524,146 +492,162 @@ function switchSem(s, el){
   const panel = document.getElementById('sem-'+s);
   if(panel) panel.classList.add('active');
   if(!activeCat[s]) activeCat[s] = getFirstCat(s);
-  activatecat(s, activeCat[s]);
-}
+  activateCat(s, activeCat[s]);
+};
 
-function updateStats(){
-  document.getElementById('stat-p').textContent = D.items.length;
-  document.getElementById('stat-n').textContent = D.notices.length;
-}
-
-// Admin trigger: call Firebase login
-document.getElementById('admin-trigger').addEventListener('click',()=>{
-  firebaseLogin();
-});
-
-function closeAdmin(){
+window.closeAdmin = function(){
   document.getElementById('overlay').classList.remove('open');
-}
+};
 
-
-
-// Called after Firebase login success
-function openPanel(){
-  document.getElementById('admin-wrap').style.display='';
-  document.getElementById('wa-input').value = D.waLink||'';
-  renderAdminLists();
-}
-
-function renderAdminLists(){
-  document.getElementById('admin-notices').innerHTML = D.notices.map((n,i)=>`
-    <div class="aitem"><div class="aitem-text">${esc(n.title)}<div class="aitem-sub">${n.type.toUpperCase()} · ${n.date}</div></div>
-    <button class="btn-del" onclick="delItem('notices',${i})">Delete</button></div>`).join('');
-
-  document.getElementById('admin-items').innerHTML = D.items.map((p,i)=>`
-    <div class="aitem"><div class="aitem-text">${esc(p.name)}<div class="aitem-sub">Sem ${p.sem} · ${CAT_LABEL[p.cat]} · ${p.year}</div></div>
-    <button class="btn-del" onclick="delItem('items',${i})">Delete</button></div>`).join('');
-
-  document.getElementById('admin-ticker').innerHTML = D.ticker.map((t,i)=>`
-    <div class="aitem"><div class="aitem-text">${esc(t)}</div>
-    <button class="btn-del" onclick="delItem('ticker',${i})">Delete</button></div>`).join('');
-}
-
-function delItem(key,i){
-  D[key].splice(i,1);
-  save(D);
-  renderAll();
-  renderAdminLists();
-}
-
-function saveWa(){
-  D.waLink=document.getElementById('wa-input').value.trim();
-  save(D);
-  document.getElementById('wa-btn').href=D.waLink;
-  alert('Saved!');
-}
-
-function addNotice(){
-  const t=document.getElementById('n-title').value.trim();
-  if(!t)return;
-  D.notices.unshift({
-    title:t,
-    type:document.getElementById('n-type').value,
-    date:today()
+// ── REAL-TIME LISTENERS (all users see live updates) ─────
+function startListeners(){
+  // items
+  onSnapshot(query(col('items')), snap=>{
+    STATE.items = snap.docs.map(d=>({id:d.id,...d.data()}));
+    buildSemPanels();
+    updateStats();
   });
-  document.getElementById('n-title').value='';
-  save(D);
-  renderAll();
-  renderAdminLists();
+
+  // notices
+  onSnapshot(query(col('notices')), snap=>{
+    STATE.notices = snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderNotices();
+    updateStats();
+  });
+
+  // ticker
+  onSnapshot(query(col('ticker')), snap=>{
+    STATE.ticker = snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderTicker();
+  });
+
+  // settings (waLink)
+  onSnapshot(doc(db,'settings','main'), snap=>{
+    if(snap.exists()){
+      STATE.waLink = snap.data().waLink || '#';
+      document.getElementById('wa-btn').href = STATE.waLink;
+    }
+  });
+
+  setLoading(100);
 }
 
-// 🔥 FIREBASE LOAD FUNCTION (OUTSIDE)
-async function loadItems(){
-  try {
-    const querySnapshot = await window.firebaseAPI.getDocs(
-      window.firebaseAPI.collection(window.firebaseAPI.db, "items")
-    );
+// ── ADMIN PANEL RENDERING ────────────────────────────────
+function renderAdminLists(){
+  document.getElementById('admin-notices').innerHTML = STATE.notices.map(n=>`
+    <div class="aitem">
+      <div class="aitem-text">${esc(n.title)}<div class="aitem-sub">${n.type.toUpperCase()} · ${n.date}</div></div>
+      <button class="btn-del" onclick="window._del('notices','${n.id}')">Delete</button>
+    </div>`).join('') || '<div style="font-family:var(--mono);font-size:12px;color:var(--ink3);padding:8px">No notices yet.</div>';
 
-    D.items = [];
+  document.getElementById('admin-items').innerHTML = STATE.items.map(p=>`
+    <div class="aitem">
+      <div class="aitem-text">${esc(p.name)}<div class="aitem-sub">Sem ${p.sem} · ${CAT_LABEL[p.cat]} · ${p.year||''}</div></div>
+      <button class="btn-del" onclick="window._del('items','${p.id}')">Delete</button>
+    </div>`).join('') || '<div style="font-family:var(--mono);font-size:12px;color:var(--ink3);padding:8px">No items yet.</div>';
 
-    querySnapshot.forEach((doc) => {
-      D.items.push(doc.data());
+  document.getElementById('admin-ticker').innerHTML = STATE.ticker.map(t=>`
+    <div class="aitem">
+      <div class="aitem-text">${esc(t.text||t)}</div>
+      <button class="btn-del" onclick="window._del('ticker','${t.id}')">Delete</button>
+    </div>`).join('') || '<div style="font-family:var(--mono);font-size:12px;color:var(--ink3);padding:8px">No messages yet.</div>';
+}
+
+window._del = async function(colName, docId){
+  try{
+    await deleteDoc(doc(db, colName, docId));
+    renderAdminLists();
+  } catch(e){ alert("Delete failed: "+e.message); }
+};
+
+// ── ADMIN ACTIONS ────────────────────────────────────────
+window.saveWa = async function(){
+  const link = document.getElementById('wa-input').value.trim();
+  try{
+    await setDoc(doc(db,'settings','main'), {waLink: link}, {merge:true});
+    showStatus('wa-status','✓ WhatsApp link saved for everyone!', true);
+  } catch(e){ showStatus('wa-status','✗ Failed: '+e.message, false); }
+};
+
+window.addNotice = async function(){
+  const title = document.getElementById('n-title').value.trim();
+  if(!title) return;
+  const btn = document.getElementById('btn-notice');
+  btn.disabled = true; btn.textContent = 'Adding...';
+  try{
+    await addDoc(col('notices'), {
+      title, type: document.getElementById('n-type').value, date: today()
     });
+    document.getElementById('n-title').value = '';
+    showStatus('notice-status','✓ Notice added — visible to all!', true);
+    renderAdminLists();
+  } catch(e){ showStatus('notice-status','✗ Failed: '+e.message, false); }
+  btn.disabled = false; btn.textContent = '+ Add';
+};
 
-    renderAll();
-
-  } catch (error) {
-    console.error(error);
-    alert("Error loading data ❌");
-  }
-}
-
-// 🔥 UPDATED ADD ITEM FUNCTION
-async function addItem(){
+window.addItem = async function(){
   const name = document.getElementById('p-name').value.trim();
   const link = document.getElementById('p-link').value.trim();
-
-  if(!name || !link){
-    alert('Please fill in the name and the Google Drive link.');
-    return;
-  }
-
-  const item = {
-    sem: parseInt(document.getElementById('p-sem').value),
-    cat: document.getElementById('p-cat').value,
-    name: name,
-    year: document.getElementById('p-year').value.trim(),
-    link: link,
-    code: document.getElementById('p-code').value.trim()
-  };
-
-  try {
-    await window.firebaseAPI.addDoc(
-      window.firebaseAPI.collection(window.firebaseAPI.db, "items"),
-      item
-    );  
-
-    // clear inputs
-    ['p-name','p-year','p-link','p-code'].forEach(id=>{
-      document.getElementById(id).value='';
+  if(!name || !link){ alert('Please fill in the name and link.'); return; }
+  const btn = document.getElementById('btn-item');
+  btn.disabled = true; btn.textContent = 'Uploading...';
+  try{
+    await addDoc(col('items'), {
+      sem:  parseInt(document.getElementById('p-sem').value),
+      cat:  document.getElementById('p-cat').value,
+      name, year: document.getElementById('p-year').value.trim(),
+      link, code: document.getElementById('p-code').value.trim()
     });
+    ['p-name','p-year','p-link','p-code'].forEach(id=>{ document.getElementById(id).value=''; });
+    showStatus('item-status','✓ Uploaded — visible to all students now!', true);
+    renderAdminLists();
+  } catch(e){ showStatus('item-status','✗ Upload failed: '+e.message, false); }
+  btn.disabled = false; btn.textContent = '+ Add';
+};
 
-    alert("Uploaded for everyone ✅");
+window.addTicker = async function(){
+  const msg = document.getElementById('ticker-input').value.trim();
+  if(!msg) return;
+  const btn = document.getElementById('btn-ticker');
+  btn.disabled = true;
+  try{
+    await addDoc(col('ticker'), { text: msg });
+    document.getElementById('ticker-input').value = '';
+    showStatus('ticker-status','✓ Message added to ticker!', true);
+    renderAdminLists();
+  } catch(e){ showStatus('ticker-status','✗ Failed: '+e.message, false); }
+  btn.disabled = false; btn.textContent = '+ Add';
+};
 
-    loadItems(); // reload from firebase
-
-  } catch (error) {
-    console.error(error);
-    alert("Error uploading ❌");
+// ── GOOGLE LOGIN ─────────────────────────────────────────
+async function adminLogin(){
+  try{
+    const provider = new GoogleAuthProvider();
+    const result   = await signInWithPopup(auth, provider);
+    const user     = result.user;
+    if(user.email === ADMIN_EMAIL){
+      document.getElementById('overlay').classList.add('open');
+      document.getElementById('wa-input').value = STATE.waLink || '';
+      renderAdminLists();
+    } else {
+      alert(`Access denied.\nOnly ${ADMIN_EMAIL} can edit this site.\nYou signed in as: ${user.email}`);
+      auth.signOut();
+    }
+  } catch(e){
+    if(e.code !== 'auth/popup-closed-by-user'){
+      alert('Login failed: '+e.message);
+    }
   }
 }
 
-function addTicker(){
-  const msg=document.getElementById('ticker-input').value.trim();
-  if(!msg)return;
-  D.ticker.push(msg);
-  document.getElementById('ticker-input').value='';
-  save(D);
-  renderAll();
-  renderAdminLists();
-}
+// ── INIT ─────────────────────────────────────────────────
+setLoading(30);
+document.getElementById('admin-trigger').addEventListener('click', adminLogin);
+document.getElementById('overlay').addEventListener('click', e=>{
+  if(e.target===document.getElementById('overlay')) window.closeAdmin();
+});
 
-// 🔥 IMPORTANT CHANGE HERE
-loadItems();
-
+startListeners(); // begins real-time sync from Firestore
 </script>
+</body>
+</html>
