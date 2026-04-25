@@ -76,17 +76,41 @@ nav{background:var(--ink);padding:0 32px;display:flex;align-items:center;justify
 .cpanel.active{display:block}
 .cpanel-head{font-family:var(--mono);font-size:11px;color:var(--amber-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .empty{padding:36px;text-align:center;color:var(--ink3);font-family:var(--mono);font-size:13px;background:var(--white);border:1px dashed var(--border);border-radius:4px;line-height:1.8}
-.papers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
-.paper-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:18px;transition:border-color 0.2s}
-.paper-card:hover{border-color:var(--amber)}
-.pyear{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:7px;letter-spacing:0.5px}
-.pname{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--ink);line-height:1.3}
-.ptags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
-.ptag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:2px;background:var(--bg);color:var(--ink3);border:1px solid var(--border)}
-.ptag.solved{background:var(--green-bg);color:var(--green);border-color:transparent}
-.ptag.gtu{background:var(--blue-bg);color:var(--blue);border-color:transparent}
-.dl-btn{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--amber-dark);background:var(--amber-light);border:1px solid #e8d090;padding:6px 12px;border-radius:2px;text-decoration:none;transition:background 0.15s}
-.dl-btn:hover{background:#faecc0}
+
+/* ── SUBJECT CARDS (year-grouped) ── */
+.subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.subj-card{
+  background:var(--white);border:1px solid var(--border);border-radius:6px;
+  padding:18px 18px 14px;transition:border-color 0.2s,box-shadow 0.2s;
+  display:flex;flex-direction:column;
+}
+.subj-card:hover{border-color:var(--amber);box-shadow:0 4px 16px rgba(0,0,0,0.07)}
+.subj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+.subj-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.35;flex:1}
+.subj-count{
+  font-family:var(--mono);font-size:10px;color:var(--amber-dark);
+  background:var(--amber-light);border:1px solid #e8d090;
+  padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:2px;
+}
+.subj-code{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:10px}
+.subj-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.stag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:2px;background:var(--bg);color:var(--ink3);border:1px solid var(--border)}
+.stag.solved{background:var(--green-bg);color:var(--green);border-color:transparent}
+.stag.gtu{background:var(--blue-bg);color:var(--blue);border-color:transparent}
+.year-label{font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px}
+.year-chips{display:flex;flex-wrap:wrap;gap:6px}
+.year-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  color:var(--amber-dark);background:var(--amber-light);
+  border:1px solid #e8d090;padding:5px 11px;border-radius:3px;
+  text-decoration:none;transition:background 0.15s,transform 0.1s;
+  cursor:pointer;
+}
+.year-chip:hover{background:#faecc0;transform:translateY(-1px)}
+.year-chip::before{content:'↓';font-size:10px;opacity:0.7}
+
+/* ── RESOURCE CARDS ── */
 .res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
 .res-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:16px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;transition:border-color 0.2s}
 .res-card:hover{border-color:var(--amber)}
@@ -94,6 +118,7 @@ nav{background:var(--ink);padding:0 32px;display:flex;align-items:center;justify
 .rname{font-size:13px;font-weight:700;color:var(--ink)}
 .rsub{font-family:var(--mono);font-size:10px;color:var(--ink3)}
 .rcount{font-family:var(--mono);font-size:10px;color:var(--amber-dark);margin-top:auto}
+
 .wa-section{background:var(--ink);padding:60px 48px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
 .wa-heading{font-family:var(--serif);font-size:34px;color:var(--white);letter-spacing:-1px;margin-bottom:10px}
 .wa-sub{font-size:15px;color:rgba(255,255,255,0.45);font-weight:300;line-height:1.7;max-width:480px}
@@ -104,10 +129,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 .footer-left strong{color:var(--amber)}
 .ftrigger{font-size:11px;font-family:var(--mono);color:rgba(255,255,255,0.15);cursor:pointer;user-select:none;transition:color 0.2s}
 .ftrigger:hover{color:rgba(255,255,255,0.4)}
-/* LOADING */
 .loading-bar{position:fixed;top:0;left:0;height:3px;background:var(--amber);width:0;transition:width 0.3s;z-index:9999}
 .loading-bar.done{width:100%;opacity:0;transition:width 0.3s,opacity 0.5s 0.3s}
-/* OVERLAY */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
 .overlay.open{display:flex}
 .abox{background:var(--white);border-radius:8px;width:100%;max-width:720px;margin:auto}
@@ -151,6 +174,10 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
   .cat-list{flex-direction:row;flex-wrap:wrap}
   .cat-btn{width:auto;padding:7px 12px;font-size:12px}
   .cat-cnt{display:none}
+  .subjects-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .subjects-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -159,7 +186,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 <div class="loading-bar" id="loading-bar"></div>
 
 <nav>
-  <div class="nav-logo"><strong>GEC</strong> Bharuch</div>
+  <div class="nav-logo"><strong>GEC</strong></div>
   <div class="nav-right">
     <a class="nav-link" href="#notices">Notices</a>
     <a class="nav-link" href="#semesters">Semesters</a>
@@ -171,7 +198,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 
 <div class="hero">
   <div>
-    <div class="hero-eyebrow">Electrical Engineering · GEC Bharuch Batch 2025 </div>
+    <div class="hero-eyebrow">Electrical Engineering · GEC Bharuch Batch 2025</div>
     <h1>Resources<br>from your<br><em>seniors.</em></h1>
     <p class="hero-sub">Papers, notes, notices — organised semester-wise. Everything you need, one place.</p>
   </div>
@@ -227,7 +254,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 </div>
 
 <footer>
-  <div class="footer-left">Made with care by <strong>EE Seniors</strong> · GTU · </div>
+  <div class="footer-left">Made with care by <strong>EE Seniors</strong> · GTU ·</div>
   <div class="ftrigger" id="admin-trigger">EE HUB v2.0</div>
 </footer>
 
@@ -310,11 +337,6 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     ALL FIREBASE LOGIC IN ONE MODULE SCRIPT
-     This fixes the "window.collection is not a function" error
-     by keeping everything inside the same module scope.
-════════════════════════════════════════════════════════ -->
 <script type="module">
 import { initializeApp }                          from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -325,7 +347,6 @@ import {
   onSnapshot, orderBy, query
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ── FIREBASE CONFIG ──────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyCWSB5hd5tZVMoh3r-dctta7f91UztMzIs",
   authDomain: "gec-bharuch-electrical.firebaseapp.com",
@@ -335,27 +356,21 @@ const firebaseConfig = {
   appId: "1:574095352204:web:67f8cc041b7f3069d276a9"
 };
 
-// ══════════════════════════════════════════
-//  YOUR ADMIN GMAIL — only this can edit
-// ══════════════════════════════════════════
 const ADMIN_EMAIL = "gecbharuch69@gmail.com";
 
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
 
-// ── HELPER REFS ─────────────────────────────────────────
 const col  = (name) => collection(db, name);
 const CAT_LABEL = {midsem:"Mid-sem Papers",gtu:"GTU Papers",solved:"Solved Papers",notes:"Notes & PDFs",resource:"Resources"};
 const CAT_ICON  = {midsem:"📝",gtu:"📋",solved:"✅",notes:"📄",resource:"🔗"};
 const CATS      = ["midsem","gtu","solved","notes","resource"];
 
-// ── LOCAL STATE ─────────────────────────────────────────
 let STATE = { items:[], notices:[], ticker:[], waLink:"#" };
 let activeSem = 1;
 let activeCat = {};
 
-// ── UTILS ───────────────────────────────────────────────
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function today(){return new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
 function setLoading(pct){ const b=document.getElementById('loading-bar'); b.style.width=pct+'%'; if(pct>=100){b.classList.add('done')} }
@@ -363,15 +378,6 @@ function showStatus(id,msg,ok){
   const el=document.getElementById(id);
   el.textContent=msg; el.className='status-msg '+(ok?'ok':'err');
   setTimeout(()=>{ el.style.display='none'; el.className='status-msg'; },3000);
-}
-
-// ── RENDER ───────────────────────────────────────────────
-function renderAll(){
-  renderTicker();
-  renderNotices();
-  buildSemPanels();
-  updateStats();
-  document.getElementById('wa-btn').href = STATE.waLink||'#';
 }
 
 function renderTicker(){
@@ -425,8 +431,10 @@ function buildSemHTML(sem){
   const panels = CATS.map(c=>{
     const items = STATE.items.filter(i=>i.sem==sem&&i.cat===c);
     let content = '';
+
     if(!items.length){
       content = `<div class="empty">No ${CAT_LABEL[c].toLowerCase()} for Semester ${sem} yet.<br>Check back soon — seniors upload regularly! 📚</div>`;
+
     } else if(c==='resource'){
       content = `<div class="res-grid">${items.map(it=>`
         <a class="res-card" href="${esc(it.link)}" target="_blank">
@@ -435,20 +443,46 @@ function buildSemHTML(sem){
           <div class="rsub">${esc(it.year||'')}</div>
           <div class="rcount">→ Open</div>
         </a>`).join('')}</div>`;
+
     } else {
-      content = `<div class="papers-grid">${items.map(it=>`
-        <div class="paper-card">
-          <div class="pyear">${esc(it.year||'')}</div>
-          <div class="pname">${esc(it.name)}</div>
-          <div class="ptags">
-            ${it.code?`<span class="ptag">${esc(it.code)}</span>`:''}
-            ${c==='solved'?'<span class="ptag solved">Solved</span>':''}
-            ${c==='gtu'?'<span class="ptag gtu">GTU</span>':''}
-            <span class="ptag">PDF</span>
+      // ── GROUP BY SUBJECT NAME, show year chips ──
+      const byName = {};
+      items.forEach(it => {
+        const key = it.name || 'Untitled';
+        if(!byName[key]) byName[key] = { code: it.code||'', cat: c, years: [] };
+        byName[key].years.push({ year: it.year||'', link: it.link });
+      });
+
+      // sort years newest first
+      Object.values(byName).forEach(subj => {
+        subj.years.sort((a, b) => {
+          const ya = parseInt((a.year||'0').replace(/[^0-9]/g,'').slice(0,4)) || 0;
+          const yb = parseInt((b.year||'0').replace(/[^0-9]/g,'').slice(0,4)) || 0;
+          return yb - ya;
+        });
+      });
+
+      content = `<div class="subjects-grid">${Object.entries(byName).map(([name, subj]) => `
+        <div class="subj-card">
+          <div class="subj-top">
+            <div class="subj-name">${esc(name)}</div>
+            <div class="subj-count">${subj.years.length} ${subj.years.length === 1 ? 'year' : 'years'}</div>
           </div>
-          <a class="dl-btn" href="${esc(it.link)}" target="_blank">↓ Download</a>
+          ${subj.code ? `<div class="subj-code">${esc(subj.code)}</div>` : ''}
+          <div class="subj-tags">
+            ${c==='solved' ? '<span class="stag solved">Solved</span>' : ''}
+            ${c==='gtu'    ? '<span class="stag gtu">GTU</span>' : ''}
+            <span class="stag">PDF</span>
+          </div>
+          <div class="year-label">Available years</div>
+          <div class="year-chips">
+            ${subj.years.map(y => `
+              <a class="year-chip" href="${esc(y.link)}" target="_blank">${esc(y.year || 'No year')}</a>
+            `).join('')}
+          </div>
         </div>`).join('')}</div>`;
     }
+
     return `<div class="cpanel" id="cp-${sem}-${c}">
       <div class="cpanel-head">${CAT_ICON[c]} ${CAT_LABEL[c]} — Semester ${sem}</div>
       ${content}
@@ -478,11 +512,7 @@ function updateStats(){
   document.getElementById('stat-n').textContent = STATE.notices.length;
 }
 
-// ── EXPOSE UI HANDLERS TO HTML onclick ──────────────────
-window._switchCat = function(sem, cat){
-  activeCat[sem] = cat;
-  activateCat(sem, cat);
-};
+window._switchCat = function(sem, cat){ activeCat[sem] = cat; activateCat(sem, cat); };
 
 window.switchSem = function(s, el){
   activeSem = s;
@@ -495,44 +525,27 @@ window.switchSem = function(s, el){
   activateCat(s, activeCat[s]);
 };
 
-window.closeAdmin = function(){
-  document.getElementById('overlay').classList.remove('open');
-};
+window.closeAdmin = function(){ document.getElementById('overlay').classList.remove('open'); };
 
-// ── REAL-TIME LISTENERS (all users see live updates) ─────
 function startListeners(){
-  // items
   onSnapshot(query(col('items')), snap=>{
     STATE.items = snap.docs.map(d=>({id:d.id,...d.data()}));
-    buildSemPanels();
-    updateStats();
+    buildSemPanels(); updateStats();
   });
-
-  // notices
   onSnapshot(query(col('notices')), snap=>{
     STATE.notices = snap.docs.map(d=>({id:d.id,...d.data()}));
-    renderNotices();
-    updateStats();
+    renderNotices(); updateStats();
   });
-
-  // ticker
   onSnapshot(query(col('ticker')), snap=>{
     STATE.ticker = snap.docs.map(d=>({id:d.id,...d.data()}));
     renderTicker();
   });
-
-  // settings (waLink)
   onSnapshot(doc(db,'settings','main'), snap=>{
-    if(snap.exists()){
-      STATE.waLink = snap.data().waLink || '#';
-      document.getElementById('wa-btn').href = STATE.waLink;
-    }
+    if(snap.exists()){ STATE.waLink = snap.data().waLink||'#'; document.getElementById('wa-btn').href = STATE.waLink; }
   });
-
   setLoading(100);
 }
 
-// ── ADMIN PANEL RENDERING ────────────────────────────────
 function renderAdminLists(){
   document.getElementById('admin-notices').innerHTML = STATE.notices.map(n=>`
     <div class="aitem">
@@ -554,19 +567,14 @@ function renderAdminLists(){
 }
 
 window._del = async function(colName, docId){
-  try{
-    await deleteDoc(doc(db, colName, docId));
-    renderAdminLists();
-  } catch(e){ alert("Delete failed: "+e.message); }
+  try{ await deleteDoc(doc(db, colName, docId)); renderAdminLists(); }
+  catch(e){ alert("Delete failed: "+e.message); }
 };
 
-// ── ADMIN ACTIONS ────────────────────────────────────────
 window.saveWa = async function(){
   const link = document.getElementById('wa-input').value.trim();
-  try{
-    await setDoc(doc(db,'settings','main'), {waLink: link}, {merge:true});
-    showStatus('wa-status','✓ WhatsApp link saved for everyone!', true);
-  } catch(e){ showStatus('wa-status','✗ Failed: '+e.message, false); }
+  try{ await setDoc(doc(db,'settings','main'), {waLink: link}, {merge:true}); showStatus('wa-status','✓ WhatsApp link saved for everyone!', true); }
+  catch(e){ showStatus('wa-status','✗ Failed: '+e.message, false); }
 };
 
 window.addNotice = async function(){
@@ -575,9 +583,7 @@ window.addNotice = async function(){
   const btn = document.getElementById('btn-notice');
   btn.disabled = true; btn.textContent = 'Adding...';
   try{
-    await addDoc(col('notices'), {
-      title, type: document.getElementById('n-type').value, date: today()
-    });
+    await addDoc(col('notices'), { title, type: document.getElementById('n-type').value, date: today() });
     document.getElementById('n-title').value = '';
     showStatus('notice-status','✓ Notice added — visible to all!', true);
     renderAdminLists();
@@ -619,7 +625,6 @@ window.addTicker = async function(){
   btn.disabled = false; btn.textContent = '+ Add';
 };
 
-// ── GOOGLE LOGIN ─────────────────────────────────────────
 async function adminLogin(){
   try{
     const provider = new GoogleAuthProvider();
@@ -634,20 +639,16 @@ async function adminLogin(){
       auth.signOut();
     }
   } catch(e){
-    if(e.code !== 'auth/popup-closed-by-user'){
-      alert('Login failed: '+e.message);
-    }
+    if(e.code !== 'auth/popup-closed-by-user'){ alert('Login failed: '+e.message); }
   }
 }
 
-// ── INIT ─────────────────────────────────────────────────
 setLoading(30);
 document.getElementById('admin-trigger').addEventListener('click', adminLogin);
 document.getElementById('overlay').addEventListener('click', e=>{
   if(e.target===document.getElementById('overlay')) window.closeAdmin();
 });
-
-startListeners(); // begins real-time sync from Firestore
+startListeners();
 </script>
 </body>
 </html>
